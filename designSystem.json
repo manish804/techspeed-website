@@ -1,0 +1,200 @@
+{
+    "designSystem": {
+      "name": "TechSpeed_Design_System",
+      "motion": {
+        "tokens": {
+          "durations": {
+            "xs": 120,
+            "sm": 200,
+            "md": 320,
+            "lg": 500,
+            "xl": 800
+          },
+          "delays": {
+            "none": 0,
+            "sm": 60,
+            "md": 120
+          },
+          "easings": {
+            "standard": [0.4, 0.0, 0.2, 1.0],
+            "emphasized": [0.2, 0.0, 0.0, 1.0],
+            "decelerate": [0.0, 0.0, 0.2, 1.0],
+            "accelerate": [0.4, 0.0, 1.0, 1.0],
+            "springSoft": { "type": "spring", "stiffness": 220, "damping": 28, "mass": 1 },
+            "springBouncy": { "type": "spring", "stiffness": 320, "damping": 16, "mass": 0.8 }
+          },
+          "transforms": {
+            "elevate": { "y": -4, "scale": 1.02 },
+            "tilt": { "rotateX": 6, "rotateY": -6 },
+            "parallax": { "translateY": 24 },
+            "glitchShift": { "x": 2, "y": -2 }
+          },
+          "shadowsAnimated": {
+            "hover": "0 10px 24px rgba(0,0,0,0.14)"
+          }
+        },
+        "globalBehaviors": {
+          "reduceMotionRespect": true,
+          "preferGPUTransforms": true,
+          "willChangeHints": ["transform", "opacity"]
+        }
+      },
+      "interactions": {
+        "hover": {
+          "default": {
+            "trigger": "hover",
+            "transition": { "duration": "sm", "easing": "standard" },
+            "from": { "transform": "none", "opacity": 1, "boxShadow": "var(--shadow-card)" },
+            "to": { "transform": "translateY(-4px) scale(1.02)", "opacity": 1, "boxShadow": "var(--shadow-animated-hover)" }
+          },
+          "cta": {
+            "trigger": "hover",
+            "transition": { "duration": "sm", "easing": "emphasized" },
+            "to": { "transform": "translateY(-2px)", "filter": "brightness(1.05)" },
+            "ripple": { "enabled": false }
+          },
+          "iconNudge": {
+            "trigger": "hover",
+            "to": { "transform": "translateX(4px)" }
+          }
+        },
+        "tilt": {
+          "cardSoft": {
+            "trigger": "pointer-move",
+            "maxTiltDeg": 6,
+            "scale": 1.01,
+            "axis": "both",
+            "perspective": 800,
+            "resetOnLeave": true,
+            "spring": "springSoft",
+            "glare": { "enabled": false }
+          },
+          "illustrationParallax": {
+            "trigger": "pointer-move",
+            "layers": [
+              { "selector": ".layer-back", "depth": 0.15 },
+              { "selector": ".layer-mid", "depth": 0.3 },
+              { "selector": ".layer-front", "depth": 0.6 }
+            ],
+            "spring": "springSoft"
+          }
+        },
+        "scroll": {
+          "revealSoft": {
+            "trigger": "on-enter-viewport",
+            "stagger": 0.08,
+            "offset": { "start": "80%", "end": "10%" },
+            "from": { "opacity": 0, "y": 24, "filter": "blur(2px)" },
+            "to": { "opacity": 1, "y": 0, "filter": "blur(0px)" },
+            "transition": { "duration": "md", "easing": "decelerate" }
+          },
+          "slideUpSection": {
+            "trigger": "on-enter-viewport",
+            "pin": false,
+            "from": { "opacity": 0, "y": 48 },
+            "to": { "opacity": 1, "y": 0 },
+            "transition": { "duration": "lg", "easing": "emphasized" }
+          },
+          "parallaxHero": {
+            "trigger": "scroll-progress",
+            "range": [0, 1],
+            "elements": [
+              { "selector": ".hero-bg", "from": { "y": -20 }, "to": { "y": 40 } },
+              { "selector": ".hero-illustration", "from": { "scale": 1.04 }, "to": { "scale": 1.0 } }
+            ]
+          }
+        },
+        "glitch": {
+          "textSoft": {
+            "trigger": "hover-or-random",
+            "intensity": 0.35,
+            "intervalMs": [2800, 5200],
+            "durationMs": 350,
+            "channels": {
+              "rgbSplit": { "x": 2, "y": -2 },
+              "scanline": { "opacity": 0.12, "heightPx": 1 },
+              "noise": { "opacity": 0.06 }
+            },
+            "transformJitter": { "x": [-1, 1], "y": [-1, 1], "skewX": [-1, 1] },
+            "accessibility": { "disableOnReduceMotion": true }
+          },
+          "imageBlock": {
+            "trigger": "hover",
+            "durationMs": 420,
+            "blockSlices": 6,
+            "sliceJitterPx": 6,
+            "rgbSplit": true
+          }
+        },
+        "inertiaScroll": {
+          "engine": "lenis-like",
+          "enabled": true,
+          "options": {
+            "lerp": 0.12,
+            "smoothWheel": true,
+            "smoothTouch": false,
+            "wheelMultiplier": 1.0,
+            "touchMultiplier": 1.2,
+            "normalizeWheel": true
+          },
+          "accessibility": { "disableOnReduceMotion": true }
+        }
+      },
+      "componentAnimationPresets": {
+        "Button": {
+          "idle": { "opacity": 1, "scale": 1 },
+          "hover": { "use": "hover.cta" },
+          "tap": { "scale": 0.98, "transition": { "duration": "xs", "easing": "accelerate" } },
+          "focus": { "outlineOffset": 3, "outlineWidth": 2 }
+        },
+        "Card": {
+          "enter": { "use": "scroll.revealSoft" },
+          "hover": { "use": "hover.default" },
+          "tilt": { "use": "tilt.cardSoft" }
+        },
+        "Hero": {
+          "scrollParallax": { "use": "scroll.parallaxHero" }
+        },
+        "NavBar": {
+          "onScroll": {
+            "thresholdPx": 12,
+            "to": { "backdropFilter": "saturate(140%) blur(8px)", "background": "rgba(255,255,255,0.6)", "shadow": "0 6px 16px rgba(0,0,0,0.06)" },
+            "transition": { "duration": "md", "easing": "standard" }
+          }
+        },
+        "SectionHeading": {
+          "glitch": { "use": "glitch.textSoft" },
+          "enter": { "use": "scroll.slideUpSection" }
+        },
+        "IconWithArrow": {
+          "hover": { "use": "hover.iconNudge" }
+        }
+      },
+      "implementationHints": {
+        "cssVariables": {
+          "shadow-card": "0 8px 24px rgba(0,0,0,0.05)",
+          "shadow-animated-hover": "0 10px 24px rgba(0,0,0,0.14)"
+        },
+        "recommendedEngines": {
+          "react": {
+            "motion": "Framer Motion",
+            "scroll": "Framer Motion + IntersectionObserver or GSAP ScrollTrigger",
+            "inertia": "Lenis (smooth scrolling)",
+            "tilt": "VanillaTilt.js or custom pointer math"
+          },
+          "vanilla": {
+            "hover": "CSS transitions",
+            "scrollReveal": "IntersectionObserver + CSS variables",
+            "glitch": "CSS clip-path + filter + keyframes"
+          }
+        },
+        "safety": {
+          "minTapTargetPx": 44,
+          "respectReducedMotion": true,
+          "fpsBudget": 60,
+          "preferCompositor": ["transform", "opacity"]
+        }
+      }
+    }
+  }
+  

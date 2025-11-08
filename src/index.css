@@ -1,0 +1,62 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+@theme {
+  /* Colors matching the design */
+  --color-bg: #F5F3FF;
+  --color-bg-dark: #2D1B3D;
+  --color-primary: #A855F7;
+  --color-accent: #8B5CF6;
+  --color-highlight: #BFFF0B;
+  --color-text: #0A0A0A;
+  --color-text-muted: #4B5563;
+  --color-border: #E5E7EB;
+
+  /* Shadows */
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.05);
+  --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 10px 24px rgba(0, 0, 0, 0.14);
+  --shadow-nav: 0 6px 16px rgba(0, 0, 0, 0.06);
+
+  /* Motion durations */
+  --duration-xs: 120ms;
+  --duration-sm: 200ms;
+  --duration-md: 320ms;
+  --duration-lg: 500ms;
+  --duration-xl: 800ms;
+
+  /* Easings */
+  --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1.0);
+  --ease-emphasized: cubic-bezier(0.2, 0.0, 0.0, 1.0);
+  --ease-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1.0);
+  --ease-accelerate: cubic-bezier(0.4, 0.0, 1.0, 1.0);
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 400;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
