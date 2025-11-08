@@ -1,0 +1,178 @@
+{
+  "tech_stack": [
+    "JavaScript",
+    "React",
+    "Vite",
+    "React Router DOM",
+    "Tailwind CSS",
+    "PostCSS"
+  ],
+  "features": [
+    {
+      "name": "Navigation System",
+      "description": "Responsive navigation bar with mobile menu, active route highlighting, and scroll-based styling",
+      "files": [
+        "src/components/NavBar.jsx"
+      ]
+    },
+    {
+      "name": "Homepage Hero Section",
+      "description": "Main landing section with headline, CTA button, and 3D isometric cylinder graphics",
+      "files": [
+        "src/components/Hero.jsx",
+        "src/pages/HomePage.jsx"
+      ]
+    },
+    {
+      "name": "Client Logos Display",
+      "description": "Section displaying client/partner logos in a horizontal scrollable layout",
+      "files": [
+        "src/components/ClientLogos.jsx"
+      ]
+    },
+    {
+      "name": "Introduction Section",
+      "description": "Company introduction with abstract S-shape graphics and call-to-action",
+      "files": [
+        "src/components/IntroductionSection.jsx"
+      ]
+    },
+    {
+      "name": "Services Showcase",
+      "description": "Three-column grid displaying AI Driven Processing, Data Services, and Customer Experience services",
+      "files": [
+        "src/components/Services.jsx"
+      ]
+    },
+    {
+      "name": "Testimonials Section",
+      "description": "Client testimonials with video thumbnail placeholders and testimonial cards",
+      "files": [
+        "src/components/Testimonials.jsx"
+      ]
+    },
+    {
+      "name": "Build Team Section",
+      "description": "Section explaining team building capabilities with bullet points and circuit board graphics",
+      "files": [
+        "src/components/BuildTeamSection.jsx"
+      ]
+    },
+    {
+      "name": "Why Suryonex Section",
+      "description": "Section highlighting company differentiators with bullet points",
+      "files": [
+        "src/components/WhySuryonexSection.jsx"
+      ]
+    },
+    {
+      "name": "Security Protocols",
+      "description": "Security information section with isometric cube graphics and security features list",
+      "files": [
+        "src/components/SecuritySection.jsx"
+      ]
+    },
+    {
+      "name": "Statistics Display",
+      "description": "Three-column stats section showing accuracy, savings, and operations metrics",
+      "files": [
+        "src/components/StatsSection.jsx"
+      ]
+    },
+    {
+      "name": "Call-to-Action Section",
+      "description": "Final CTA section with buttons for getting started and calling",
+      "files": [
+        "src/components/CTA.jsx"
+      ]
+    },
+    {
+      "name": "Footer Component",
+      "description": "Comprehensive footer with links, contact information, partner logos, and floating CTA button",
+      "files": [
+        "src/components/Footer.jsx"
+      ]
+    },
+    {
+      "name": "SVG Icons Library",
+      "description": "Centralized SVG icon components for social media, contact, services, and UI elements",
+      "files": [
+        "src/components/Icons.jsx"
+      ]
+    },
+    {
+      "name": "Routing System",
+      "description": "React Router setup with routes for all pages and scroll-to-top functionality",
+      "files": [
+        "src/App.jsx",
+        "src/components/ScrollToTop.jsx"
+      ]
+    },
+    {
+      "name": "Solutions Page",
+      "description": "Detailed solutions page with three main service categories and their features/benefits",
+      "files": [
+        "src/pages/SolutionsPage.jsx"
+      ]
+    },
+    {
+      "name": "Workforce Page",
+      "description": "Page dedicated to team building with features grid and detailed information",
+      "files": [
+        "src/pages/WorkforcePage.jsx"
+      ]
+    },
+    {
+      "name": "About Page",
+      "description": "Company information page with story, values, timeline, team, and FAQ sections",
+      "files": [
+        "src/pages/AboutPage.jsx"
+      ]
+    },
+    {
+      "name": "Contact Page",
+      "description": "Contact form with validation, contact information display, map placeholder, and FAQ section",
+      "files": [
+        "src/pages/ContactPage.jsx"
+      ]
+    },
+    {
+      "name": "Success Stories Page",
+      "description": "Client testimonials and case studies with stats section and detailed stories",
+      "files": [
+        "src/pages/SuccessStoriesPage.jsx"
+      ]
+    },
+    {
+      "name": "Careers Page",
+      "description": "Job listings page with benefits section and open positions",
+      "files": [
+        "src/pages/CareersPage.jsx"
+      ]
+    },
+    {
+      "name": "Resources Page",
+      "description": "Resources hub with whitepapers, webinars, guides, and blog preview",
+      "files": [
+        "src/pages/ResourcesPage.jsx"
+      ]
+    },
+    {
+      "name": "Blog Pages",
+      "description": "Blog listing and individual blog post pages",
+      "files": [
+        "src/pages/BlogPage.jsx",
+        "src/pages/BlogPostPage.jsx"
+      ]
+    },
+    {
+      "name": "Legal Pages",
+      "description": "Privacy policy and disclaimer/terms pages",
+      "files": [
+        "src/pages/PrivacyPage.jsx",
+        "src/pages/DisclaimerPage.jsx"
+      ]
+    }
+  ]
+}
+

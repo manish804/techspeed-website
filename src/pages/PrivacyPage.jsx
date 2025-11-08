@@ -17,7 +17,7 @@ export default function PrivacyPage() {
                                     Introduction
                                 </h2>
                                 <p>
-                                    At TechSpeed, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
+                                    At Suryonex, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
                                 </p>
                             </section>
 
@@ -56,7 +56,7 @@ export default function PrivacyPage() {
                                     Data Security
                                 </h2>
                                 <p>
-                                    We implement appropriate technical and organizational security measures to protect your personal information. In TechSpeed's 20+ year history, we have never lost a document, mismanaged an electronic data file, or had a breach of confidentiality.
+                                    We implement appropriate technical and organizational security measures to protect your personal information. In Suryonex's 20+ year history, we have never lost a document, mismanaged an electronic data file, or had a breach of confidentiality.
                                 </p>
                             </section>
 
@@ -68,7 +68,7 @@ export default function PrivacyPage() {
                                     If you have questions about this Privacy Policy, please contact us at:
                                 </p>
                                 <p className="mt-4">
-                                    <strong>Email:</strong> privacy@techspeed.com<br />
+                                    <strong>Email:</strong> privacy@suryonex.com<br />
                                     <strong>Phone:</strong> 503-927-0027<br />
                                     <strong>Address:</strong> 1300 SW 6th Ave Portland OR 97201
                                 </p>

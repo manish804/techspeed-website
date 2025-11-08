@@ -70,7 +70,7 @@ export default function CareersPage() {
                             Open Positions
                         </h2>
                         <p className="text-lg text-gray-600">
-                            Find your next opportunity with TechSpeed
+                            Find your next opportunity with Suryonex
                         </p>
                     </div>
                     <div className="space-y-4">

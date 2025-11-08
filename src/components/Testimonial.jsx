@@ -31,7 +31,7 @@ export default function Testimonial() {
                             "
                         </div>
                         <blockquote className="text-2xl lg:text-3xl font-semibold mb-6 leading-relaxed">
-                            TechSpeed transformed our operations with their exceptional outsourcing services. The team is responsive, skilled, and truly understands our needs.
+                            Suryonex transformed our operations with their exceptional outsourcing services. The team is responsive, skilled, and truly understands our needs.
                         </blockquote>
                         <div>
                             <p className="font-semibold text-lg">Sarah Johnson</p>

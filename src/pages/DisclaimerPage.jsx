@@ -17,7 +17,7 @@ export default function DisclaimerPage() {
                                     General Information
                                 </h2>
                                 <p>
-                                    The information on this website is provided on an "as is" basis. To the fullest extent permitted by law, TechSpeed excludes all representations, warranties, and conditions relating to our website and the use of this website.
+                                    The information on this website is provided on an "as is" basis. To the fullest extent permitted by law, Suryonex excludes all representations, warranties, and conditions relating to our website and the use of this website.
                                 </p>
                             </section>
 
@@ -35,7 +35,7 @@ export default function DisclaimerPage() {
                                     Limitation of Liability
                                 </h2>
                                 <p>
-                                    In no event will TechSpeed be liable for any loss or damage including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this website.
+                                    In no event will Suryonex be liable for any loss or damage including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this website.
                                 </p>
                             </section>
 
@@ -56,7 +56,7 @@ export default function DisclaimerPage() {
                                     If you have questions about this Disclaimer, please contact us at:
                                 </p>
                                 <p className="mt-4">
-                                    <strong>Email:</strong> info@techspeed.com<br />
+                                    <strong>Email:</strong> info@suryonex.com<br />
                                     <strong>Phone:</strong> 503-927-0027<br />
                                     <strong>Address:</strong> 1300 SW 6th Ave Portland OR 97201
                                 </p>

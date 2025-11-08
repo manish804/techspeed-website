@@ -16,7 +16,7 @@ export default function CTABanner() {
                             Ready to Transform Your Business?
                         </h2>
                         <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                            Join hundreds of companies that trust TechSpeed for their outsourcing needs
+                            Join hundreds of companies that trust Suryonex for their outsourcing needs
                         </p>
                         <button
                             className={cn(

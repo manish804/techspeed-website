@@ -14,7 +14,7 @@ export default function ResourcesPage() {
             { title: 'Data Security Best Practices', date: 'Feb 5, 2024', duration: '50 min' }
         ],
         guides: [
-            { title: 'Getting Started with TechSpeed', Icon: GuideIcon, pages: '24 pages' },
+            { title: 'Getting Started with Suryonex', Icon: GuideIcon, pages: '24 pages' },
             { title: 'API Documentation', Icon: CodeIcon, pages: '156 pages' },
             { title: 'Best Practices Guide', Icon: DocumentIcon, pages: '48 pages' }
         ]

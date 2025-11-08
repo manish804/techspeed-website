@@ -30,7 +30,7 @@ export default function NavBar() {
                                 TS
                             </span>
                             <span className="text-[8px] font-semibold tracking-[0.15em] mt-[-2px]" style={{ fontFamily: 'Space Grotesk', color: '#0A0A0A' }}>
-                                TECHSPEED
+                                SURYONEX
                             </span>
                         </div>
                     </Link>

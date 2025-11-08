@@ -8,7 +8,7 @@ export default function SuccessStoriesPage() {
             challenge: '',
             solution: '',
             results: [],
-            testimonial: 'I would not work with any other service provider. The best part of working with TechSpeed is they provide you with flexibility. My advice for anyone considering TechSpeed is pretty straightforward. Do it.',
+            testimonial: 'I would not work with any other service provider. The best part of working with Suryonex is they provide you with flexibility. My advice for anyone considering Suryonex is pretty straightforward. Do it.',
             author: 'Rajiv Chegu',
             Icon: UserIcon
         },
@@ -18,7 +18,7 @@ export default function SuccessStoriesPage() {
             challenge: '',
             solution: '',
             results: [],
-            testimonial: 'We have been using TechSpeed since 2005 for our data processing. They have consistently delivered data in a quick and thorough manner I honestly cannot think of a single incident where our information was late or delivered with errors. Working with them has been an easy and seamless transaction. I would happily recommend TechSpeed to any company in need of data services.',
+            testimonial: 'We have been using Suryonex since 2005 for our data processing. They have consistently delivered data in a quick and thorough manner I honestly cannot think of a single incident where our information was late or delivered with errors. Working with them has been an easy and seamless transaction. I would happily recommend Suryonex to any company in need of data services.',
             author: 'Elizabeth Gilmore',
             Icon: BriefcaseIcon
         },
@@ -28,7 +28,7 @@ export default function SuccessStoriesPage() {
             challenge: '',
             solution: '',
             results: [],
-            testimonial: "I'm honestly not sure how I first found TechSpeed, probably a Google search many years ago. All I can say is that TechSpeed has been a blessing. I give them clear instructions on what I need, and they do the rest, quickly, efficiently and accurately. And if I'm not sure how to accomplish the goal, they come in with suggestions on how to achieve my goal.",
+            testimonial: "I'm honestly not sure how I first found Suryonex, probably a Google search many years ago. All I can say is that Suryonex has been a blessing. I give them clear instructions on what I need, and they do the rest, quickly, efficiently and accurately. And if I'm not sure how to accomplish the goal, they come in with suggestions on how to achieve my goal.",
             author: 'Brian Kent, COO',
             Icon: SuitIcon
         },
@@ -38,7 +38,7 @@ export default function SuccessStoriesPage() {
             challenge: '',
             solution: '',
             results: [],
-            testimonial: 'We have worked with TechSpeed since 2007 and they have greatly increased our efficiency in communicating with prospective students. In the past, it would take months for us to input, but with TechSpeed\'s help, we can get student data into our system much faster.',
+            testimonial: 'We have worked with Suryonex since 2007 and they have greatly increased our efficiency in communicating with prospective students. In the past, it would take months for us to input, but with Suryonex\'s help, we can get student data into our system much faster.',
             author: 'Kelly Groves, Associate Director of IP',
             Icon: GraduationIcon
         },
@@ -48,7 +48,7 @@ export default function SuccessStoriesPage() {
             challenge: '',
             solution: '',
             results: [],
-            testimonial: 'TechSpeed deftly grasped the core requirements and efficiently delivers a research reports of the utmost caliber to fulfill the stated need. Using a strategic and established workflow, they maintain a rapid pace and deliver well within the budget.',
+            testimonial: 'Suryonex deftly grasped the core requirements and efficiently delivers a research reports of the utmost caliber to fulfill the stated need. Using a strategic and established workflow, they maintain a rapid pace and deliver well within the budget.',
             author: 'Denise Burns, Founding Partner',
             Icon: ChartIcon
         },
@@ -58,7 +58,7 @@ export default function SuccessStoriesPage() {
             challenge: '',
             solution: '',
             results: [],
-            testimonial: 'TechSpeed swiftly got us through a busy season when we were backed up on data entry projects. They went above and beyond to exceed our expectations for sooner-than-expected delivery. Their QA is spot-on and very thorough. TechSpeed has been so great to work with!',
+            testimonial: 'Suryonex swiftly got us through a busy season when we were backed up on data entry projects. They went above and beyond to exceed our expectations for sooner-than-expected delivery. Their QA is spot-on and very thorough. Suryonex has been so great to work with!',
             author: 'Diane Ernstsson, Manager at JDXpert',
             Icon: TrendingIcon
         }

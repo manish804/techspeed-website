@@ -181,7 +181,7 @@ export default function ContactPage() {
                                         <h3 className="font-semibold text-lg mb-1" style={{ fontFamily: 'Space Grotesk' }}>
                                             Email Us
                                         </h3>
-                                        <p className="text-gray-600">info@techspeed.com</p>
+                                        <p className="text-gray-600">info@suryonex.com</p>
                                     </div>
                                 </div>
 

@@ -21,7 +21,7 @@ export default function Testimonials() {
                             {/* Left: Testimonial Text */}
                             <div>
                                 <p className="text-lg text-[#0A0A0A] mb-6 leading-relaxed" style={{ fontFamily: 'Inter' }}>
-                                    "I would not work with any other service provider. The best part of working with TechSpeed is they provide you with flexibility. My advice for anyone considering TechSpeed is pretty straightforward. Do it."
+                                    "I would not work with any other service provider. The best part of working with Suryonex is they provide you with flexibility. My advice for anyone considering Suryonex is pretty straightforward. Do it."
                                 </p>
                                 <div className="mb-4">
                                     <p className="font-semibold text-[#0A0A0A] text-lg" style={{ fontFamily: 'Space Grotesk' }}>

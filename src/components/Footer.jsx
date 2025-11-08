@@ -39,7 +39,7 @@ export default function Footer() {
                                         TS
                                     </span>
                                     <span className="text-xs font-semibold tracking-[0.15em] mt-1" style={{ fontFamily: 'Space Grotesk' }}>
-                                        TECHSPEED
+                                        SURYONEX
                                     </span>
                                 </div>
                             </Link>

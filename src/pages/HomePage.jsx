@@ -5,7 +5,7 @@ import Features from '@/components/Features'
 import Services from '@/components/Services'
 import Testimonials from '@/components/Testimonials'
 import BuildTeamSection from '@/components/BuildTeamSection'
-import WhyTechSpeedSection from '@/components/WhyTechSpeedSection'
+import WhySuryonexSection from '@/components/WhySuryonexSection'
 import SecuritySection from '@/components/SecuritySection'
 import StatsSection from '@/components/StatsSection'
 import CTA from '@/components/CTA'
@@ -19,7 +19,7 @@ export default function HomePage() {
             <Services />
             <Testimonials />
             <BuildTeamSection />
-            <WhyTechSpeedSection />
+            <WhySuryonexSection />
             <SecuritySection />
             <StatsSection />
             <CTA />

@@ -11,12 +11,12 @@ export default function AboutPage() {
 
     const values = [
         { Icon: AccuracyIcon, title: 'Accuracy', description: 'Our process ensures near-perfect data accuracy through double-key data entry, quality checks, validation routines, and verification checks.' },
-        { Icon: SecurityIcon, title: 'Security', description: 'At TechSpeed, we take our role as temporary stewards of your data seriously. Our security systems include VPNs, SSLs, and PGP encryption.' },
+        { Icon: SecurityIcon, title: 'Security', description: 'At Suryonex, we take our role as temporary stewards of your data seriously. Our security systems include VPNs, SSLs, and PGP encryption.' },
         { Icon: AgilityIcon, title: 'Agility', description: 'We guarantee 100% on-time delivery for your urgent data entry needs. Simply share your outsourcing objectives and we\'ll build a customized solution.' }
     ]
 
     const milestones = [
-        { year: '2002', event: 'TechSpeed Founded', description: 'Started as a minority women-owned technology business' },
+        { year: '2002', event: 'Suryonex Founded', description: 'Started as a minority women-owned technology business' },
         { year: '2005', event: 'First Major Client', description: 'Established long-term partnerships with leading companies' },
         { year: '2010', event: 'Global Expansion', description: 'Opened operations in India to serve global clients' },
         { year: '2015', event: 'AI Integration', description: 'Launched AI-powered data processing solutions' },
@@ -31,7 +31,7 @@ export default function AboutPage() {
                 <div className="max-w-[1400px] mx-auto px-8">
                     <div className="max-w-3xl">
                         <h1 className="text-6xl font-bold mb-6" style={{ fontFamily: 'Space Grotesk', color: '#0A0A0A' }}>
-                            About TechSpeed
+                            About Suryonex
                         </h1>
                         <p className="text-xl text-gray-600 mb-8">
                             A minority women-owned and operated technology business since 2002.
@@ -50,7 +50,7 @@ export default function AboutPage() {
                             </h2>
                             <div className="space-y-4 text-gray-600 leading-relaxed">
                                 <p>
-                                    TechSpeed, a leader in data processing solutions since 2002, offers a complete suite of outsourcing solutions.
+                                    Suryonex, a leader in data processing solutions since 2002, offers a complete suite of outsourcing solutions.
                                 </p>
                                 <p>
                                     We are the first BPO that combines AI technology with fully integrated human support to help firms of all sizes work faster, smarter, and cheaper leveraging US-based project management and global production teams.
@@ -59,7 +59,7 @@ export default function AboutPage() {
                                     Our goal is to keep your costs low, quality high, and customers satisfied.
                                 </p>
                                 <p>
-                                    In TechSpeed's 20+ year history, we have never lost a document, mismanaged an electronic data file, or had a breach of confidentiality.
+                                    In Suryonex's 20+ year history, we have never lost a document, mismanaged an electronic data file, or had a breach of confidentiality.
                                 </p>
                             </div>
                         </div>
@@ -151,7 +151,7 @@ export default function AboutPage() {
                             Meet Our Leadership
                         </h2>
                         <p className="text-lg text-gray-600">
-                            The team driving TechSpeed forward
+                            The team driving Suryonex forward
                         </p>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -181,20 +181,20 @@ export default function AboutPage() {
                         <div className="space-y-6">
                             {[
                                 {
-                                    q: 'What services does TechSpeed offer?',
-                                    a: 'TechSpeed offers AI-driven processing, data services, and customer experience solutions including data entry, data mining, back office support, service desk, and content moderation.'
+                                    q: 'What services does Suryonex offer?',
+                                    a: 'Suryonex offers AI-driven processing, data services, and customer experience solutions including data entry, data mining, back office support, service desk, and content moderation.'
                                 },
                                 {
-                                    q: 'How long has TechSpeed been in business?',
-                                    a: 'TechSpeed has been a leader in data processing solutions since 2002, with over 20 years of experience in the outsourcing industry.'
+                                    q: 'How long has Suryonex been in business?',
+                                    a: 'Suryonex has been a leader in data processing solutions since 2002, with over 20 years of experience in the outsourcing industry.'
                                 },
                                 {
-                                    q: 'What makes TechSpeed different?',
+                                    q: 'What makes Suryonex different?',
                                     a: 'We are the first BPO that combines AI technology with fully integrated human support. We leverage US-based project management and global production teams to provide the best value.'
                                 },
                                 {
                                     q: 'How do you ensure data security?',
-                                    a: 'In TechSpeed\'s 20+ year history, we have never lost a document, mismanaged an electronic data file, or had a breach of confidentiality. Our security systems include VPNs, SSLs, PGP encryption, and password-protected data access.'
+                                    a: 'In Suryonex\'s 20+ year history, we have never lost a document, mismanaged an electronic data file, or had a breach of confidentiality. Our security systems include VPNs, SSLs, PGP encryption, and password-protected data access.'
                                 },
                                 {
                                     q: 'What is your accuracy rate?',

@@ -55,7 +55,7 @@ export default function IntroductionSection() {
 
                         {/* Main Text */}
                         <p className="text-lg text-white/80 mb-6 leading-relaxed" style={{ fontFamily: 'Inter' }}>
-                            TechSpeed, a leader in data processing solutions since 2002, offers a complete suite of outsourcing solutions.
+                            Suryonex, a leader in data processing solutions since 2002, offers a complete suite of outsourcing solutions.
                         </p>
                         <p className="text-lg text-white/80 mb-8 leading-relaxed" style={{ fontFamily: 'Inter' }}>
                             We are the first BPO that combines AI technology with fully integrated human support to help firms of all sizes work faster, smarter, and cheaper leveraging US-based project management and global production teams.

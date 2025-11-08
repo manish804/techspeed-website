@@ -11,7 +11,7 @@ export default function SecuritySection() {
                             Security Protocols
                         </h2>
                         <p className="text-lg text-[#0A0A0A]/80 mb-8 leading-relaxed" style={{ fontFamily: 'Inter' }}>
-                            In TechSpeed's 20+ year history, we have never lost a document, mismanaged an electronic data file, or had a breach of confidentiality. Our process includes:
+                            In Suryonex's 20+ year history, we have never lost a document, mismanaged an electronic data file, or had a breach of confidentiality. Our process includes:
                         </p>
                         <ul className="space-y-3 mb-10" style={{ fontFamily: 'Inter' }}>
                             <li className="flex items-start gap-3 text-[#0A0A0A]/80">
