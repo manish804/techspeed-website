@@ -1,12 +1,32 @@
 import { Link } from 'react-router-dom'
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import { useMagneticHover } from '@/hooks/useMagneticHover'
 
 export default function CTA() {
+    const [contentRef, isContentVisible] = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
+    const [graphicRef, isGraphicVisible] = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
+    const button1Ref = useMagneticHover({ strength: 0.15 })
+    const button2Ref = useMagneticHover({ strength: 0.15 })
+
     return (
         <section className="relative py-24 bg-[#2D1B3D] overflow-hidden">
-            <div className="max-w-[1400px] mx-auto px-8">
+            {/* Animated Gradient Background */}
+            <div className="absolute inset-0 animated-gradient-purple opacity-30"></div>
+            
+            {/* Floating Shapes */}
+            <div className="absolute top-10 right-10 w-40 h-40 bg-[#FF6B35] opacity-5 rounded-full floating-shape blur-2xl"></div>
+            <div className="absolute bottom-10 left-10 w-32 h-32 bg-[#BFFF0B] opacity-5 rounded-full floating-shape blur-xl" style={{ animationDelay: '2s' }}></div>
+            
+            {/* Grid Pattern Overlay */}
+            <div className="absolute inset-0 grid-pattern opacity-20"></div>
+            
+            <div className="max-w-[1400px] mx-auto px-8 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     {/* Left: Content */}
-                    <div className="relative z-10">
+                    <div 
+                        ref={contentRef}
+                        className={`relative z-10 scroll-animate-left ${isContentVisible ? 'visible' : ''}`}
+                    >
                         <h2 className="text-4xl lg:text-5xl font-normal mb-6 text-white leading-tight" style={{ fontFamily: 'Space Grotesk' }}>
                             Smart outsourcing using a perfect blend of people and technology.
                         </h2>
@@ -15,8 +35,9 @@ export default function CTA() {
                         </p>
                         <div className="flex flex-wrap gap-4">
                             <Link
+                                ref={button1Ref}
                                 to="/contact"
-                                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#BFFF0B] text-[#0A0A0A] text-sm font-medium hover:opacity-90 transition-opacity"
+                                className="magnetic-button btn-enhanced ripple-effect inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#BFFF0B] text-[#0A0A0A] text-sm font-medium"
                                 style={{ fontFamily: 'Inter' }}
                             >
                                 Get Started
@@ -25,8 +46,9 @@ export default function CTA() {
                                 </span>
                             </Link>
                             <a
+                                ref={button2Ref}
                                 href="tel:503-927-0027"
-                                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-[#2D1B3D] text-sm font-medium hover:opacity-90 transition-opacity"
+                                className="magnetic-button btn-enhanced ripple-effect inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-[#2D1B3D] text-sm font-medium"
                                 style={{ fontFamily: 'Inter' }}
                             >
                                 Give us a Call 503-927-0027
@@ -38,7 +60,10 @@ export default function CTA() {
                     </div>
 
                     {/* Right: Abstract Semi-circular Pattern */}
-                    <div className="relative h-[400px] flex items-center justify-center">
+                    <div 
+                        ref={graphicRef}
+                        className={`relative h-[400px] flex items-center justify-center scroll-animate-right ${isGraphicVisible ? 'visible' : ''}`}
+                    >
                         <svg viewBox="0 0 400 400" className="w-full h-full">
                             {/* Concentric orange semi-circles */}
                             {[80, 100, 120, 140, 160, 180].map((radius, i) => (

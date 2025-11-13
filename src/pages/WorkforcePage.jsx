@@ -1,7 +1,16 @@
 import { Link } from 'react-router-dom'
 import { GraduationIcon, TrendingIcon, UsersIcon, StarIcon } from '@/components/Icons'
+import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation'
+import { useParallax } from '@/hooks/useParallax'
+import { useRipple } from '@/hooks/useRipple'
 
 export default function WorkforcePage() {
+    const [heroRef, heroVisible] = useScrollAnimation({ threshold: 0.12, triggerOnce: true })
+    const { getItemRef, getItemStyle } = useStaggeredAnimation(120)
+    const parallaxOffset = useParallax(0.12)
+    const [ctaHeroRef, ctaHeroClick] = useRipple()
+    const [ctaMidRef, ctaMidClick] = useRipple()
+    const [ctaBottomRef, ctaBottomClick] = useRipple()
     const features = [
         {
             title: 'Credentialed',
@@ -28,9 +37,10 @@ export default function WorkforcePage() {
     return (
         <div className="pt-20">
             {/* Hero Section */}
-            <section className="bg-gradient-to-br from-[#F5F3FF] to-white py-24">
-                <div className="max-w-[1400px] mx-auto px-8">
-                    <div className="max-w-3xl">
+            <section className="bg-gradient-to-br from-[#F5F3FF] to-white py-24 relative overflow-hidden">
+                <div className="absolute -top-16 -right-16 w-56 h-56 rounded-full bg-[#A855F7]/10 blur-2xl" style={{ transform: `translateY(${parallaxOffset * 0.5}px)` }}></div>
+                <div className="max-w-[1400px] mx-auto px-8 relative z-10">
+                    <div ref={heroRef} className={`max-w-3xl scroll-animate ${heroVisible ? 'visible' : ''}`}>
                         <h1 className="text-6xl font-bold mb-6" style={{ fontFamily: 'Space Grotesk', color: '#0A0A0A' }}>
                             Build Your Team
                         </h1>
@@ -38,8 +48,10 @@ export default function WorkforcePage() {
                             Build your team with experienced experts. Outsource your non-core activities to us, so you can stay focused on growing your business.
                         </p>
                         <Link
+                            ref={ctaHeroRef}
+                            onClick={ctaHeroClick}
                             to="/contact"
-                            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-[#2D1B3D] text-white font-medium hover:opacity-90 transition-opacity"
+                            className="magnetic-button btn-enhanced ripple-effect inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-[#2D1B3D] text-white font-medium"
                         >
                             Get Started
                             <span className="text-lg">→</span>
@@ -53,7 +65,12 @@ export default function WorkforcePage() {
                 <div className="max-w-[1400px] mx-auto px-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {features.map((feature, index) => (
-                            <div key={index} className="bg-[#F5F3FF] rounded-2xl p-8 hover:shadow-lg transition-shadow">
+                            <div
+                                key={index}
+                                ref={getItemRef(index)}
+                                style={getItemStyle(index)}
+                                className="bg-[#F5F3FF] rounded-2xl p-8 card-elevated card-hover-lift rounded-transition"
+                            >
                                 <div className="mb-4 text-[#A855F7]">
                                     <feature.Icon className="w-16 h-16" />
                                 </div>
@@ -111,8 +128,10 @@ export default function WorkforcePage() {
                             </div>
                             
                             <Link
+                                ref={ctaMidRef}
+                                onClick={ctaMidClick}
                                 to="/contact"
-                                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#2D1B3D] border-2 border-white text-white text-sm font-medium hover:bg-white hover:text-[#2D1B3D] transition-all"
+                                className="magnetic-button btn-enhanced ripple-effect inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#2D1B3D] border-2 border-white text-white text-sm font-medium"
                                 style={{ fontFamily: 'Inter' }}
                             >
                                 Build your team now
@@ -178,8 +197,10 @@ export default function WorkforcePage() {
                         Let us build out a project plan for you today
                     </p>
                     <Link
+                        ref={ctaBottomRef}
+                        onClick={ctaBottomClick}
                         to="/contact"
-                        className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-[#2D1B3D] text-white font-semibold hover:opacity-90 transition-opacity"
+                        className="magnetic-button btn-enhanced ripple-effect inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-[#2D1B3D] text-white font-semibold"
                     >
                         Get Started
                         <span>→</span>

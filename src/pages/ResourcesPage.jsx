@@ -1,7 +1,17 @@
 import { Link } from 'react-router-dom'
 import { GuideIcon, CodeIcon, DocumentIcon, BookIcon, DownloadIcon, VideoIcon, CalendarIcon, ClockIcon, PencilIcon } from '@/components/Icons'
+import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation'
+import { useParallax } from '@/hooks/useParallax'
+import { useRipple } from '@/hooks/useRipple'
 
 export default function ResourcesPage() {
+    const [heroRef, heroVisible] = useScrollAnimation({ threshold: 0.12, triggerOnce: true })
+    const { getItemRef: getPaperRef, getItemStyle: getPaperStyle } = useStaggeredAnimation(120)
+    const { getItemRef: getWebinarRef, getItemStyle: getWebinarStyle } = useStaggeredAnimation(120)
+    const { getItemRef: getGuideRef, getItemStyle: getGuideStyle } = useStaggeredAnimation(120)
+    const parallaxOffset = useParallax(0.1)
+    const [downloadRef, downloadClick] = useRipple()
+    const [subscribeRef, subscribeClick] = useRipple()
     const resources = {
         whitepapers: [
             { title: 'The Future of Outsourcing in 2024', downloads: '2.5k', category: 'Industry Insights' },
@@ -23,9 +33,10 @@ export default function ResourcesPage() {
     return (
         <div className="pt-20">
             {/* Hero Section */}
-            <section className="bg-gradient-to-br from-[#F5F3FF] to-white py-24">
-                <div className="max-w-[1400px] mx-auto px-8">
-                    <div className="max-w-3xl">
+            <section className="bg-gradient-to-br from-[#F5F3FF] to-white py-24 relative overflow-hidden">
+                <div className="absolute -top-14 -right-14 w-56 h-56 rounded-full bg-[#A855F7]/10 blur-2xl" style={{ transform: `translateY(${parallaxOffset * 0.5}px)` }}></div>
+                <div className="max-w-[1400px] mx-auto px-8 relative z-10">
+                    <div ref={heroRef} className={`max-w-3xl scroll-animate ${heroVisible ? 'visible' : ''}`}>
                         <h1 className="text-6xl font-bold mb-6" style={{ fontFamily: 'Space Grotesk', color: '#0A0A0A' }}>
                             Resources & Insights
                         </h1>
@@ -51,7 +62,7 @@ export default function ResourcesPage() {
                                 <p className="text-white/90 mb-6 text-lg">
                                     A comprehensive 80-page guide covering everything you need to know about modern outsourcing strategies, implementation, and best practices.
                                 </p>
-                                <button className="px-8 py-4 bg-[#BFFF0B] text-[#0A0A0A] rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                                <button ref={downloadRef} onClick={downloadClick} className="magnetic-button btn-enhanced ripple-effect px-8 py-4 bg-[#BFFF0B] text-[#0A0A0A] rounded-lg font-semibold">
                                     Download Free Guide →
                                 </button>
                             </div>
@@ -80,8 +91,8 @@ export default function ResourcesPage() {
                         </p>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {resources.whitepapers.map((paper) => (
-                            <div key={paper.title} className="bg-white rounded-2xl p-8 hover:shadow-lg transition-shadow">
+                        {resources.whitepapers.map((paper, index) => (
+                            <div key={paper.title} ref={getPaperRef(index)} style={getPaperStyle(index)} className="bg-white rounded-2xl p-8 card-elevated card-hover-lift rounded-transition">
                                 <div className="mb-4 text-[#A855F7]">
                                     <DocumentIcon className="w-16 h-16" />
                                 </div>
@@ -114,8 +125,8 @@ export default function ResourcesPage() {
                         </p>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {resources.webinars.map((webinar) => (
-                            <div key={webinar.title} className="bg-[#F5F3FF] rounded-2xl p-8 hover:shadow-lg transition-shadow">
+                        {resources.webinars.map((webinar, index) => (
+                            <div key={webinar.title} ref={getWebinarRef(index)} style={getWebinarStyle(index)} className="bg-[#F5F3FF] rounded-2xl p-8 card-elevated rounded-transition">
                                 <div className="mb-4 text-[#A855F7]">
                                     <VideoIcon className="w-16 h-16" />
                                 </div>
@@ -132,7 +143,7 @@ export default function ResourcesPage() {
                                         <span>{webinar.duration}</span>
                                     </div>
                                 </div>
-                                <button className="w-full py-3 bg-[#2D1B3D] text-white rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                                <button className="w-full py-3 bg-[#2D1B3D] text-white rounded-lg font-semibold btn-enhanced ripple-effect">
                                     Register Now
                                 </button>
                             </div>
@@ -153,8 +164,8 @@ export default function ResourcesPage() {
                         </p>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {resources.guides.map((guide) => (
-                            <div key={guide.title} className="bg-white rounded-2xl p-8 hover:shadow-lg transition-shadow">
+                        {resources.guides.map((guide, index) => (
+                            <div key={guide.title} ref={getGuideRef(index)} style={getGuideStyle(index)} className="bg-white rounded-2xl p-8 card-elevated card-hover-lift rounded-transition">
                                 <div className="mb-4 text-[#A855F7]">
                                     <guide.Icon className="w-16 h-16" />
                                 </div>
@@ -233,7 +244,7 @@ export default function ResourcesPage() {
                             placeholder="Enter your email"
                             className="flex-1 px-6 py-4 rounded-lg text-gray-900 outline-none"
                         />
-                        <button className="px-8 py-4 bg-[#BFFF0B] text-[#0A0A0A] rounded-lg font-semibold hover:opacity-90 transition-opacity whitespace-nowrap">
+                        <button ref={subscribeRef} onClick={subscribeClick} className="magnetic-button btn-enhanced ripple-effect px-8 py-4 bg-[#BFFF0B] text-[#0A0A0A] rounded-lg font-semibold whitespace-nowrap">
                             Subscribe →
                         </button>
                     </div>

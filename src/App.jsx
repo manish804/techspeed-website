@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import ScrollToTop from '@/components/ScrollToTop'
@@ -15,6 +16,54 @@ import BlogPostPage from '@/pages/BlogPostPage'
 import PrivacyPage from '@/pages/PrivacyPage'
 import DisclaimerPage from '@/pages/DisclaimerPage'
 
+function AnimatedRoutes() {
+  const location = useLocation()
+  const [displayLocation, setDisplayLocation] = useState(location)
+  const [transitionStage, setTransitionStage] = useState('page-enter-active')
+
+  useEffect(() => {
+    if (location !== displayLocation) {
+      setTransitionStage('page-exit-active')
+    }
+  }, [location, displayLocation])
+
+  useEffect(() => {
+    if (transitionStage === 'page-exit-active') {
+      const timer = setTimeout(() => {
+        setDisplayLocation(location)
+        setTransitionStage('page-enter')
+      }, 150)
+
+      return () => clearTimeout(timer)
+    }
+  }, [transitionStage, location])
+
+  useEffect(() => {
+    if (transitionStage === 'page-enter') {
+      setTransitionStage('page-enter-active')
+    }
+  }, [transitionStage])
+
+  return (
+    <div className={transitionStage} style={{ minHeight: '100%' }}>
+      <Routes location={displayLocation}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/solutions" element={<SolutionsPage />} />
+        <Route path="/workforce" element={<WorkforcePage />} />
+        <Route path="/resources" element={<ResourcesPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/success-stories" element={<SuccessStoriesPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/careers" element={<CareersPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/terms" element={<DisclaimerPage />} />
+      </Routes>
+    </div>
+  )
+}
+
 function App() {
   return (
     <Router>
@@ -22,20 +71,7 @@ function App() {
       <div className="min-h-screen flex flex-col">
         <NavBar />
         <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/solutions" element={<SolutionsPage />} />
-            <Route path="/workforce" element={<WorkforcePage />} />
-            <Route path="/resources" element={<ResourcesPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/success-stories" element={<SuccessStoriesPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/careers" element={<CareersPage />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/blog/:slug" element={<BlogPostPage />} />
-            <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/terms" element={<DisclaimerPage />} />
-          </Routes>
+          <AnimatedRoutes />
         </main>
         <Footer />
       </div>

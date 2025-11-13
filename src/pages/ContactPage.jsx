@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { EmailIcon, PhoneIcon, LocationIcon, ChatIcon, MapIcon } from '@/components/Icons'
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import Accordion from '@/components/Accordion'
+import { useMagneticHover } from '@/hooks/useMagneticHover'
 
 export default function ContactPage() {
     const [formData, setFormData] = useState({
@@ -11,6 +14,9 @@ export default function ContactPage() {
         message: ''
     })
     const [submitted, setSubmitted] = useState(false)
+    const [heroRef, isHeroVisible] = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
+    const [formRef, isFormVisible] = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
+    const [infoRef, isInfoVisible] = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -25,13 +31,72 @@ export default function ContactPage() {
             [e.target.name]: e.target.value
         })
     }
+    
+    // Magnetic Submit Button Component
+    function MagneticSubmitButton({ submitted }) {
+        const magneticRef = useMagneticHover({ strength: 0.15 })
+        
+        return (
+            <button
+                ref={magneticRef}
+                type="submit"
+                className="magnetic-button btn-enhanced ripple-effect w-full sm:w-auto px-8 py-4 rounded-lg bg-[#2D1B3D] text-white font-semibold flex items-center justify-center gap-2"
+            >
+                {submitted ? (
+                    <>
+                        <span>✓</span>
+                        Message Sent!
+                    </>
+                ) : (
+                    <>
+                        Send Message
+                        <span>→</span>
+                    </>
+                )}
+            </button>
+        )
+    }
+    
+    // Contact Info Card Component
+    function ContactInfoCard({ icon, title, content, delay = 0, isVisible, action }) {
+        const contentArray = Array.isArray(content) ? content : [content]
+        
+        return (
+            <div
+                className="flex gap-4 p-4 rounded-lg bg-white card-elevated rounded-transition transition-all duration-300 hover:shadow-xl"
+                style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? 'translateX(0)' : 'translateX(-20px)',
+                    transition: `opacity 0.6s ease-out ${delay}s, transform 0.6s ease-out ${delay}s, box-shadow 0.3s ease-out`
+                }}
+            >
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#F5F3FF] flex items-center justify-center text-[#A855F7] transition-transform duration-300 hover:scale-110">
+                    {icon}
+                </div>
+                <div className="flex-grow">
+                    <h3 className="font-semibold text-lg mb-1" style={{ fontFamily: 'Space Grotesk' }}>
+                        {title}
+                    </h3>
+                    {contentArray.map((item, index) => (
+                        <p key={index} className="text-gray-600">
+                            {item}
+                        </p>
+                    ))}
+                    {action}
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className="pt-20">
             {/* Hero Section */}
             <section className="bg-gradient-to-br from-[#F5F3FF] to-white py-24">
                 <div className="max-w-[1400px] mx-auto px-8">
-                    <div className="max-w-3xl mx-auto text-center">
+                    <div 
+                        ref={heroRef}
+                        className={`max-w-3xl mx-auto text-center scroll-animate ${isHeroVisible ? 'visible' : ''}`}
+                    >
                         <h1 className="text-6xl font-bold mb-6" style={{ fontFamily: 'Space Grotesk', color: '#0A0A0A' }}>
                             Let's Talk About Your Project
                         </h1>
@@ -47,80 +112,80 @@ export default function ContactPage() {
                 <div className="max-w-[1400px] mx-auto px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
                         {/* Contact Form */}
-                        <div>
+                        <div
+                            ref={formRef}
+                            className={`scroll-animate-left ${isFormVisible ? 'visible' : ''}`}
+                        >
                             <h2 className="text-3xl font-bold mb-8" style={{ fontFamily: 'Space Grotesk' }}>
                                 Send Us a Message
                             </h2>
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                                            Full Name *
-                                        </label>
+                                    <div className="floating-label-input">
                                         <input
                                             type="text"
                                             name="name"
                                             required
                                             value={formData.name}
                                             onChange={handleChange}
-                                            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#A855F7] focus:ring-2 focus:ring-[#A855F7]/20 outline-none transition-all"
-                                            placeholder="John Doe"
+                                            className="floating-input"
+                                            placeholder=" "
                                         />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                                            Email Address *
+                                        <label className="floating-label">
+                                            Full Name *
                                         </label>
+                                    </div>
+                                    <div className="floating-label-input">
                                         <input
                                             type="email"
                                             name="email"
                                             required
                                             value={formData.email}
                                             onChange={handleChange}
-                                            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#A855F7] focus:ring-2 focus:ring-[#A855F7]/20 outline-none transition-all"
-                                            placeholder="john@company.com"
+                                            className="floating-input"
+                                            placeholder=" "
                                         />
+                                        <label className="floating-label">
+                                            Email Address *
+                                        </label>
                                     </div>
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                                            Company Name
-                                        </label>
+                                    <div className="floating-label-input">
                                         <input
                                             type="text"
                                             name="company"
                                             value={formData.company}
                                             onChange={handleChange}
-                                            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#A855F7] focus:ring-2 focus:ring-[#A855F7]/20 outline-none transition-all"
-                                            placeholder="Your Company"
+                                            className="floating-input"
+                                            placeholder=" "
                                         />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                                            Phone Number
+                                        <label className="floating-label">
+                                            Company Name
                                         </label>
+                                    </div>
+                                    <div className="floating-label-input">
                                         <input
                                             type="tel"
                                             name="phone"
                                             value={formData.phone}
                                             onChange={handleChange}
-                                            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#A855F7] focus:ring-2 focus:ring-[#A855F7]/20 outline-none transition-all"
-                                            placeholder="+1 (555) 000-0000"
+                                            className="floating-input"
+                                            placeholder=" "
                                         />
+                                        <label className="floating-label">
+                                            Phone Number
+                                        </label>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Service Interested In
-                                    </label>
                                     <select
                                         name="service"
                                         value={formData.service}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#A855F7] focus:ring-2 focus:ring-[#A855F7]/20 outline-none transition-all"
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#A855F7] focus:ring-2 focus:ring-[#A855F7]/20 outline-none transition-all bg-white"
                                     >
                                         <option value="">Select a service</option>
                                         <option value="back-office">Back Office Support</option>
@@ -132,10 +197,7 @@ export default function ContactPage() {
                                     </select>
                                 </div>
 
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Message *
-                                    </label>
+                                <div className="relative">
                                     <textarea
                                         name="message"
                                         required
@@ -147,91 +209,65 @@ export default function ContactPage() {
                                     ></textarea>
                                 </div>
 
-                                <button
-                                    type="submit"
-                                    className="w-full sm:w-auto px-8 py-4 rounded-lg bg-[#2D1B3D] text-white font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
-                                >
-                                    {submitted ? (
-                                        <>
-                                            <span>✓</span>
-                                            Message Sent!
-                                        </>
-                                    ) : (
-                                        <>
-                                            Send Message
-                                            <span>→</span>
-                                        </>
-                                    )}
-                                </button>
+                                <MagneticSubmitButton submitted={submitted} />
                             </form>
                         </div>
 
                         {/* Contact Info */}
-                        <div>
+                        <div
+                            ref={infoRef}
+                            className={`scroll-animate-right ${isInfoVisible ? 'visible' : ''}`}
+                        >
                             <h2 className="text-3xl font-bold mb-8" style={{ fontFamily: 'Space Grotesk' }}>
                                 Get In Touch
                             </h2>
 
-                            <div className="space-y-8">
-                                <div className="flex gap-4">
-                                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#F5F3FF] flex items-center justify-center text-[#A855F7]">
-                                        <EmailIcon className="w-6 h-6" />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-semibold text-lg mb-1" style={{ fontFamily: 'Space Grotesk' }}>
-                                            Email Us
-                                        </h3>
-                                        <p className="text-gray-600">info@suryonex.com</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex gap-4">
-                                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#F5F3FF] flex items-center justify-center text-[#A855F7]">
-                                        <PhoneIcon className="w-6 h-6" />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-semibold text-lg mb-1" style={{ fontFamily: 'Space Grotesk' }}>
-                                            Call Us
-                                        </h3>
-                                        <p className="text-gray-600">503-927-0027</p>
-                                        <p className="text-gray-600">Mon-Fri, 9am-6pm EST</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex gap-4">
-                                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#F5F3FF] flex items-center justify-center text-[#A855F7]">
-                                        <LocationIcon className="w-6 h-6" />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-semibold text-lg mb-1" style={{ fontFamily: 'Space Grotesk' }}>
-                                            Visit Us
-                                        </h3>
-                                        <p className="text-gray-600">1300 SW 6th Ave Portland OR 97201</p>
-                                        <p className="text-gray-600">USA</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex gap-4">
-                                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#F5F3FF] flex items-center justify-center text-[#A855F7]">
-                                        <ChatIcon className="w-6 h-6" />
-                                    </div>
-                                    <div>
-                                        <h3 className="font-semibold text-lg mb-1" style={{ fontFamily: 'Space Grotesk' }}>
-                                            Live Chat
-                                        </h3>
-                                        <p className="text-gray-600">Available 24/7</p>
-                                        <button className="text-[#A855F7] font-semibold hover:underline mt-1">
-                                            Start Chat →
-                                        </button>
-                                    </div>
-                                </div>
+                            <div className="space-y-6">
+                                <ContactInfoCard
+                                    icon={<EmailIcon className="w-6 h-6" />}
+                                    title="Email Us"
+                                    content="info@suryonex.com"
+                                    delay={0.1}
+                                    isVisible={isInfoVisible}
+                                />
+                                <ContactInfoCard
+                                    icon={<PhoneIcon className="w-6 h-6" />}
+                                    title="Call Us"
+                                    content={["503-927-0027", "Mon-Fri, 9am-6pm EST"]}
+                                    delay={0.2}
+                                    isVisible={isInfoVisible}
+                                />
+                                <ContactInfoCard
+                                    icon={<LocationIcon className="w-6 h-6" />}
+                                    title="Visit Us"
+                                    content={["1300 SW 6th Ave Portland OR 97201", "USA"]}
+                                    delay={0.3}
+                                    isVisible={isInfoVisible}
+                                />
+                                <ContactInfoCard
+                                    icon={<ChatIcon className="w-6 h-6" />}
+                                    title="Live Chat"
+                                    content="Available 24/7"
+                                    delay={0.4}
+                                    isVisible={isInfoVisible}
+                                    action={<button className="text-[#A855F7] font-semibold hover:underline mt-1 transition-colors">Start Chat →</button>}
+                                />
                             </div>
 
                             {/* Map Placeholder */}
-                            <div className="mt-12 rounded-2xl overflow-hidden bg-[#F5F3FF] h-64 flex items-center justify-center">
-                                <div className="text-center">
-                                    <MapIcon className="w-16 h-16 mx-auto mb-4 text-[#A855F7]" />
-                                    <p className="text-gray-600">Interactive Map</p>
+                            <div 
+                                className="mt-12 rounded-2xl overflow-hidden bg-gradient-to-br from-[#F5F3FF] to-[#E9D5FF] h-64 flex items-center justify-center card-elevated rounded-transition relative gradient-overlay"
+                                style={{
+                                    opacity: isInfoVisible ? 1 : 0,
+                                    transform: isInfoVisible ? 'scale(1)' : 'scale(0.95)',
+                                    transition: 'opacity 0.6s ease-out 0.5s, transform 0.6s ease-out 0.5s'
+                                }}
+                            >
+                                <div className="text-center relative z-10">
+                                    <div className="animate-float mb-4">
+                                        <MapIcon className="w-16 h-16 mx-auto text-[#A855F7]" />
+                                    </div>
+                                    <p className="text-gray-600 font-medium">Interactive Map</p>
                                 </div>
                             </div>
                         </div>
@@ -240,41 +276,35 @@ export default function ContactPage() {
             </section>
 
             {/* FAQ Section */}
-            <section className="py-24 bg-[#F5F3FF]">
-                <div className="max-w-[1400px] mx-auto px-8">
+            <section className="py-24 bg-[#F5F3FF] relative overflow-hidden">
+                {/* Background Effects */}
+                <div className="absolute inset-0 animated-gradient opacity-20"></div>
+                <div className="absolute top-20 right-20 w-40 h-40 bg-[#A855F7] opacity-5 rounded-full floating-shape blur-2xl"></div>
+                
+                <div className="max-w-[1400px] mx-auto px-8 relative z-10">
                     <div className="max-w-3xl mx-auto">
-                        <h2 className="text-4xl font-bold mb-12 text-center" style={{ fontFamily: 'Space Grotesk' }}>
-                            Frequently Asked Questions
-                        </h2>
-                        <div className="space-y-6">
-                            {[
-                                {
-                                    q: 'What is your typical response time?',
-                                    a: 'We typically respond to all inquiries within 24 hours during business days.'
-                                },
-                                {
-                                    q: 'Do you offer custom solutions?',
-                                    a: 'Yes! We tailor our services to meet your specific business needs and requirements.'
-                                },
-                                {
-                                    q: 'What industries do you serve?',
-                                    a: 'We work with businesses across various industries including tech, healthcare, finance, e-commerce, and more.'
-                                },
-                                {
-                                    q: 'How do you ensure data security?',
-                                    a: 'We follow industry-standard security protocols and are compliant with GDPR, SOC 2, and other major security frameworks.'
-                                }
-                            ].map((faq, index) => (
-                                <details key={index} className="bg-white rounded-lg p-6 cursor-pointer group">
-                                    <summary className="font-semibold text-lg flex justify-between items-center" style={{ fontFamily: 'Space Grotesk' }}>
-                                        {faq.q}
-                                        <span className="text-[#A855F7] group-open:rotate-180 transition-transform">▼</span>
-                                    </summary>
-                                    <p className="mt-4 text-gray-600 leading-relaxed">
-                                        {faq.a}
-                                    </p>
-                                </details>
-                            ))}
+                        <div className="text-center mb-12">
+                            <h2 
+                                className="text-4xl font-bold mb-4" 
+                                style={{ fontFamily: 'Space Grotesk' }}
+                            >
+                                Frequently Asked Questions
+                            </h2>
+                            <div className="w-24 h-1 bg-[#A855F7] mx-auto rounded-full"></div>
+                        </div>
+                        <div className="space-y-4">
+                            <Accordion title="What is your typical response time?">
+                                We typically respond to all inquiries within 24 hours during business days.
+                            </Accordion>
+                            <Accordion title="Do you offer custom solutions?">
+                                Yes! We tailor our services to meet your specific business needs and requirements.
+                            </Accordion>
+                            <Accordion title="What industries do you serve?">
+                                We work with businesses across various industries including tech, healthcare, finance, e-commerce, and more.
+                            </Accordion>
+                            <Accordion title="How do you ensure data security?">
+                                We follow industry-standard security protocols and are compliant with GDPR, SOC 2, and other major security frameworks.
+                            </Accordion>
                         </div>
                     </div>
                 </div>

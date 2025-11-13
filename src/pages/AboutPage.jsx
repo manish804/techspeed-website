@@ -1,7 +1,22 @@
 import { Link } from 'react-router-dom'
 import { AccuracyIcon, SecurityIcon, AgilityIcon, BusinessPersonIcon, DeveloperIcon, RocketIcon } from '@/components/Icons'
+import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation'
+import { useParallax } from '@/hooks/useParallax'
+import { useRipple } from '@/hooks/useRipple'
 
 export default function AboutPage() {
+    const [heroRef, heroVisible] = useScrollAnimation({ threshold: 0.12, triggerOnce: true })
+    const [storyRef, storyVisible] = useScrollAnimation({ threshold: 0.12, triggerOnce: true })
+    const [valuesRef, valuesVisible] = useScrollAnimation({ threshold: 0.12, triggerOnce: true })
+    const [timelineRef, timelineVisible] = useScrollAnimation({ threshold: 0.12, triggerOnce: true })
+    const [teamRef, teamVisible] = useScrollAnimation({ threshold: 0.12, triggerOnce: true })
+    const [faqRef, faqVisible] = useScrollAnimation({ threshold: 0.12, triggerOnce: true })
+    const [ctaRef, ctaVisible] = useScrollAnimation({ threshold: 0.12, triggerOnce: true })
+
+    const { getItemRef: getValueItemRef, getItemStyle: getValueItemStyle } = useStaggeredAnimation(120)
+    const { getItemRef: getMilestoneItemRef, getItemStyle: getMilestoneItemStyle } = useStaggeredAnimation(100)
+    const { getItemRef: getTeamItemRef, getItemStyle: getTeamItemStyle } = useStaggeredAnimation(120)
+    const parallaxOffset = useParallax(0.1)
     const team = [
         { name: 'Sarah Johnson', role: 'CEO & Founder', Icon: BusinessPersonIcon, bio: '15+ years in outsourcing industry' },
         { name: 'Michael Chen', role: 'CTO', Icon: DeveloperIcon, bio: 'AI & Technology Expert' },
@@ -27,9 +42,12 @@ export default function AboutPage() {
     return (
         <div className="pt-20">
             {/* Hero Section */}
-            <section className="bg-gradient-to-br from-[#F5F3FF] to-white py-24">
-                <div className="max-w-[1400px] mx-auto px-8">
-                    <div className="max-w-3xl">
+            <section className="bg-gradient-to-br from-[#F5F3FF] to-white py-24 relative overflow-hidden">
+                {/* Parallax background accents */}
+                <div className="absolute -left-20 top-10 w-48 h-48 rounded-full bg-[#A855F7]/10 blur-2xl" style={{ transform: `translateY(${parallaxOffset * 0.4}px)` }}></div>
+                <div className="absolute -right-24 -bottom-16 w-64 h-64 rounded-full bg-[#BFFF0B]/10 blur-3xl" style={{ transform: `translateY(${parallaxOffset * 0.6}px)` }}></div>
+                <div className="max-w-[1400px] mx-auto px-8 relative z-10">
+                    <div ref={heroRef} className={`max-w-3xl scroll-animate ${heroVisible ? 'visible' : ''}`}>
                         <h1 className="text-6xl font-bold mb-6" style={{ fontFamily: 'Space Grotesk', color: '#0A0A0A' }}>
                             About Suryonex
                         </h1>
@@ -44,7 +62,7 @@ export default function AboutPage() {
             <section className="py-24 bg-white">
                 <div className="max-w-[1400px] mx-auto px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                        <div>
+                        <div ref={storyRef} className={`scroll-animate ${storyVisible ? 'visible' : ''}`}>
                             <h2 className="text-4xl font-bold mb-6" style={{ fontFamily: 'Space Grotesk' }}>
                                 Our Story
                             </h2>
@@ -63,7 +81,7 @@ export default function AboutPage() {
                                 </p>
                             </div>
                         </div>
-                        <div className="bg-[#F5F3FF] rounded-2xl p-12 flex items-center justify-center h-96">
+                        <div className="bg-[#F5F3FF] rounded-2xl p-12 flex items-center justify-center h-96 card-elevated rounded-transition scroll-animate-right" style={{ opacity: storyVisible ? 1 : 0, transform: storyVisible ? 'translateX(0)' : 'translateX(30px)', transition: 'opacity 0.6s ease-out, transform 0.6s ease-out' }}>
                             <div className="text-center">
                                 <div className="mb-4 text-[#A855F7] flex justify-center">
                                     <RocketIcon className="w-24 h-24" />
@@ -83,7 +101,7 @@ export default function AboutPage() {
             {/* Values Section */}
             <section className="py-24 bg-[#F5F3FF]">
                 <div className="max-w-[1400px] mx-auto px-8">
-                    <div className="text-center mb-16">
+                    <div ref={valuesRef} className={`text-center mb-16 scroll-animate ${valuesVisible ? 'visible' : ''}`}>
                         <h2 className="text-4xl font-bold mb-4" style={{ fontFamily: 'Space Grotesk' }}>
                             Our Core Values
                         </h2>
@@ -92,8 +110,13 @@ export default function AboutPage() {
                         </p>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {values.map((value) => (
-                            <div key={value.title} className="bg-white rounded-2xl p-8 text-center hover:shadow-lg transition-shadow">
+                        {values.map((value, index) => (
+                            <div
+                                key={value.title}
+                                ref={getValueItemRef(index)}
+                                style={getValueItemStyle(index)}
+                                className="bg-white rounded-2xl p-8 text-center card-elevated card-hover-lift rounded-transition"
+                            >
                                 <div className="flex justify-center mb-4 text-[#A855F7]">
                                     <value.Icon className="w-16 h-16" />
                                 </div>
@@ -110,7 +133,7 @@ export default function AboutPage() {
             {/* Timeline Section */}
             <section className="py-24 bg-white">
                 <div className="max-w-[1400px] mx-auto px-8">
-                    <div className="text-center mb-16">
+                    <div ref={timelineRef} className={`text-center mb-16 scroll-animate ${timelineVisible ? 'visible' : ''}`}>
                         <h2 className="text-4xl font-bold mb-4" style={{ fontFamily: 'Space Grotesk' }}>
                             Our Journey
                         </h2>
@@ -122,9 +145,9 @@ export default function AboutPage() {
                         <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-[#A855F7] opacity-20"></div>
                         <div className="space-y-12">
                             {milestones.map((milestone, index) => (
-                                <div key={milestone.year} className={`flex items-center gap-8 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
+                                <div key={milestone.year} ref={getMilestoneItemRef(index)} style={getMilestoneItemStyle(index)} className={`flex items-center gap-8 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
                                     <div className={`flex-1 ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
-                                        <div className="inline-block bg-white p-6 rounded-xl shadow-md">
+                                        <div className="inline-block bg-white p-6 rounded-xl shadow-md card-elevated rounded-transition">
                                             <div className="text-3xl font-bold text-[#A855F7] mb-2" style={{ fontFamily: 'Space Grotesk' }}>
                                                 {milestone.year}
                                             </div>
@@ -146,7 +169,7 @@ export default function AboutPage() {
             {/* Team Section */}
             <section className="py-24 bg-[#F5F3FF]">
                 <div className="max-w-[1400px] mx-auto px-8">
-                    <div className="text-center mb-16">
+                    <div ref={teamRef} className={`text-center mb-16 scroll-animate ${teamVisible ? 'visible' : ''}`}>
                         <h2 className="text-4xl font-bold mb-4" style={{ fontFamily: 'Space Grotesk' }}>
                             Meet Our Leadership
                         </h2>
@@ -155,8 +178,8 @@ export default function AboutPage() {
                         </p>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {team.map((member) => (
-                            <div key={member.name} className="bg-white rounded-2xl p-8 text-center hover:shadow-lg transition-shadow">
+                        {team.map((member, index) => (
+                            <div key={member.name} ref={getTeamItemRef(index)} style={getTeamItemStyle(index)} className="bg-white rounded-2xl p-8 text-center card-elevated card-hover-lift rounded-transition">
                                 <div className="mb-4 text-[#A855F7] flex justify-center">
                                     <member.Icon className="w-16 h-16" />
                                 </div>
@@ -174,7 +197,7 @@ export default function AboutPage() {
             {/* FAQ Section */}
             <section id="faq" className="py-24 bg-white">
                 <div className="max-w-[1400px] mx-auto px-8">
-                    <div className="max-w-3xl mx-auto">
+                    <div ref={faqRef} className={`max-w-3xl mx-auto scroll-animate ${faqVisible ? 'visible' : ''}`}>
                         <h2 className="text-4xl font-bold mb-12 text-center" style={{ fontFamily: 'Space Grotesk' }}>
                             FAQs
                         </h2>
@@ -222,22 +245,31 @@ export default function AboutPage() {
 
             {/* CTA Section */}
             <section className="py-24 bg-[#2D1B3D] text-white">
-                <div className="max-w-[1400px] mx-auto px-8 text-center">
+                <div ref={ctaRef} className={`max-w-[1400px] mx-auto px-8 text-center scroll-animate ${ctaVisible ? 'visible' : ''}`}>
                     <h2 className="text-5xl font-bold mb-6" style={{ fontFamily: 'Space Grotesk' }}>
                         Join Our Team
                     </h2>
                     <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
                         We're always looking for talented individuals to join our growing team
                     </p>
-                    <Link
-                        to="/careers"
-                        className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-[#BFFF0B] text-[#0A0A0A] font-semibold hover:opacity-90 transition-opacity"
-                    >
-                        View Open Positions
-                        <span>→</span>
-                    </Link>
+                    <CTAAboutButton />
                 </div>
             </section>
         </div>
+    )
+}
+
+function CTAAboutButton() {
+    const [ref, handleClick] = useRipple()
+    return (
+        <Link
+            ref={ref}
+            to="/careers"
+            onClick={handleClick}
+            className="magnetic-button btn-enhanced ripple-effect inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-[#BFFF0B] text-[#0A0A0A] font-semibold"
+        >
+            View Open Positions
+            <span>→</span>
+        </Link>
     )
 }

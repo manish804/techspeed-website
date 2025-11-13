@@ -1,9 +1,12 @@
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+
 export default function PrivacyPage() {
+    const [containerRef, visible] = useScrollAnimation({ threshold: 0.1, triggerOnce: true })
     return (
         <div className="pt-20">
             <section className="bg-gradient-to-br from-[#F5F3FF] to-white py-24">
                 <div className="max-w-[1400px] mx-auto px-8">
-                    <div className="max-w-4xl mx-auto">
+                    <div ref={containerRef} className={`max-w-4xl mx-auto scroll-animate ${visible ? 'visible' : ''}`}>
                         <h1 className="text-6xl font-bold mb-6" style={{ fontFamily: 'Space Grotesk', color: '#0A0A0A' }}>
                             Privacy Policy
                         </h1>

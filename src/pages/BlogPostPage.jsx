@@ -1,7 +1,9 @@
 import { useParams, Link } from 'react-router-dom'
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 
 export default function BlogPostPage() {
     const { slug } = useParams()
+    const [articleRef, articleVisible] = useScrollAnimation({ threshold: 0.12, triggerOnce: true })
 
     return (
         <div className="pt-20">
@@ -19,7 +21,7 @@ export default function BlogPostPage() {
                         <span>•</span>
                         <span>5 min read</span>
                     </div>
-                    <div className="prose prose-lg max-w-none">
+                    <div ref={articleRef} className={`prose prose-lg max-w-none scroll-animate ${articleVisible ? 'visible' : ''}`}>
                         <p className="text-lg text-gray-700 leading-relaxed mb-6">
                             This is a sample blog post. In a real implementation, you would fetch the actual content based on the slug parameter.
                         </p>

@@ -1,12 +1,31 @@
 import { Link } from 'react-router-dom'
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import { useMagneticHover } from '@/hooks/useMagneticHover'
 
 export default function SecuritySection() {
+    const [contentRef, isContentVisible] = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
+    const [graphicRef, isGraphicVisible] = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
+    const buttonRef = useMagneticHover({ strength: 0.15 })
+
     return (
         <section className="relative bg-[#F5F3FF] py-24 overflow-hidden">
-            <div className="max-w-[1400px] mx-auto px-8">
+            {/* Animated Gradient Background */}
+            <div className="absolute inset-0 animated-gradient opacity-30"></div>
+            
+            {/* Floating Shapes */}
+            <div className="absolute top-10 left-10 w-32 h-32 bg-[#A855F7] opacity-10 rounded-full floating-shape blur-xl"></div>
+            <div className="absolute bottom-10 right-10 w-28 h-28 bg-[#BFFF0B] opacity-10 rounded-full floating-shape blur-xl" style={{ animationDelay: '2s' }}></div>
+            
+            {/* Dot Pattern Overlay */}
+            <div className="absolute inset-0 dot-pattern opacity-20"></div>
+            
+            <div className="max-w-[1400px] mx-auto px-8 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     {/* Left: Content */}
-                    <div className="relative z-10">
+                    <div 
+                        ref={contentRef}
+                        className={`relative z-10 scroll-animate-left ${isContentVisible ? 'visible' : ''}`}
+                    >
                         <h2 className="text-4xl lg:text-5xl font-normal mb-6 text-[#0A0A0A] leading-tight" style={{ fontFamily: 'Space Grotesk' }}>
                             Security Protocols
                         </h2>
@@ -14,34 +33,53 @@ export default function SecuritySection() {
                             In Suryonex's 20+ year history, we have never lost a document, mismanaged an electronic data file, or had a breach of confidentiality. Our process includes:
                         </p>
                         <ul className="space-y-3 mb-10" style={{ fontFamily: 'Inter' }}>
-                            <li className="flex items-start gap-3 text-[#0A0A0A]/80">
+                            <li 
+                                className="flex items-start gap-3 text-[#0A0A0A]/80 opacity-0 animate-fade-in-up" 
+                                style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}
+                            >
                                 <span className="text-[#BFFF0B] mt-1">✓</span>
                                 <span>Local support</span>
                             </li>
-                            <li className="flex items-start gap-3 text-[#0A0A0A]/80">
+                            <li 
+                                className="flex items-start gap-3 text-[#0A0A0A]/80 opacity-0 animate-fade-in-up" 
+                                style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}
+                            >
                                 <span className="text-[#BFFF0B] mt-1">✓</span>
                                 <span>Workstation Monitoring</span>
                             </li>
-                            <li className="flex items-start gap-3 text-[#0A0A0A]/80">
+                            <li 
+                                className="flex items-start gap-3 text-[#0A0A0A]/80 opacity-0 animate-fade-in-up" 
+                                style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}
+                            >
                                 <span className="text-[#BFFF0B] mt-1">✓</span>
                                 <span>Secure Data Transferal</span>
                             </li>
-                            <li className="flex items-start gap-3 text-[#0A0A0A]/80">
+                            <li 
+                                className="flex items-start gap-3 text-[#0A0A0A]/80 opacity-0 animate-fade-in-up" 
+                                style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}
+                            >
                                 <span className="text-[#BFFF0B] mt-1">✓</span>
                                 <span>Proprietary security solutions</span>
                             </li>
-                            <li className="flex items-start gap-3 text-[#0A0A0A]/80">
+                            <li 
+                                className="flex items-start gap-3 text-[#0A0A0A]/80 opacity-0 animate-fade-in-up" 
+                                style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}
+                            >
                                 <span className="text-[#BFFF0B] mt-1">✓</span>
                                 <span>VPNs, SSLs, PGP encryptions and Password Protected Data Access</span>
                             </li>
-                            <li className="flex items-start gap-3 text-[#0A0A0A]/80">
+                            <li 
+                                className="flex items-start gap-3 text-[#0A0A0A]/80 opacity-0 animate-fade-in-up" 
+                                style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}
+                            >
                                 <span className="text-[#BFFF0B] mt-1">✓</span>
                                 <span>Best-in-class data archiving and destruction procedures</span>
                             </li>
                         </ul>
                         <Link
-                            to="/about#faq"
-                            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#2D1B3D] text-white text-sm font-medium hover:opacity-90 transition-opacity"
+                            ref={buttonRef}
+                            to="/about"
+                            className="magnetic-button btn-enhanced ripple-effect inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#2D1B3D] text-white text-sm font-medium"
                             style={{ fontFamily: 'Inter' }}
                         >
                             FAQs
@@ -52,7 +90,10 @@ export default function SecuritySection() {
                     </div>
 
                     {/* Right: Isometric White Cube with Purple Padlock */}
-                    <div className="relative h-[500px] flex items-center justify-center">
+                    <div 
+                        ref={graphicRef}
+                        className={`relative h-[500px] flex items-center justify-center scroll-animate-right ${isGraphicVisible ? 'visible' : ''}`}
+                    >
                         <svg viewBox="0 0 400 500" className="w-full h-full">
                             {/* Isometric cube base */}
                             <g transform="translate(200, 300)">
@@ -86,7 +127,7 @@ export default function SecuritySection() {
                                     opacity="0.6"
                                 />
                                 {/* Padlock handle on top */}
-                                <g transform="translate(0, -100)">
+                                <g transform="translate(0, -100)" className="animate-float">
                                     {/* Lock body */}
                                     <rect x="-20" y="0" width="40" height="50" rx="5" fill="#A855F7" stroke="#2D1B3D" strokeWidth="2" />
                                     {/* Lock shackle */}

@@ -1,12 +1,31 @@
 import { Link } from 'react-router-dom'
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import { useMagneticHover } from '@/hooks/useMagneticHover'
 
 export default function BuildTeamSection() {
+    const [contentRef, isContentVisible] = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
+    const [graphicRef, isGraphicVisible] = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
+    const buttonRef = useMagneticHover({ strength: 0.15 })
+
     return (
         <section className="relative bg-[#2D1B3D] py-24 overflow-hidden">
-            <div className="max-w-[1400px] mx-auto px-8">
+            {/* Animated Gradient Background */}
+            <div className="absolute inset-0 animated-gradient-purple opacity-20"></div>
+            
+            {/* Floating Shapes */}
+            <div className="absolute top-20 right-20 w-32 h-32 bg-[#BFFF0B] opacity-5 rounded-full floating-shape blur-xl"></div>
+            <div className="absolute bottom-20 left-20 w-40 h-40 bg-[#A855F7] opacity-5 rounded-full floating-shape blur-2xl" style={{ animationDelay: '1.5s' }}></div>
+            
+            {/* Grid Pattern Overlay */}
+            <div className="absolute inset-0 grid-pattern opacity-15"></div>
+            
+            <div className="max-w-[1400px] mx-auto px-8 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     {/* Left: Content */}
-                    <div className="relative z-10">
+                    <div 
+                        ref={contentRef}
+                        className={`relative z-10 scroll-animate-left ${isContentVisible ? 'visible' : ''}`}
+                    >
                         <h2 className="text-4xl lg:text-5xl font-normal mb-6 text-white leading-tight" style={{ fontFamily: 'Space Grotesk' }}>
                             Build your team with experienced experts.
                         </h2>
@@ -16,27 +35,39 @@ export default function BuildTeamSection() {
                         
                         {/* Bullet Points */}
                         <div className="space-y-4 mb-8">
-                            <div className="flex items-start gap-3 text-white">
+                            <div 
+                                className="flex items-start gap-3 text-white opacity-0 animate-fade-in-up" 
+                                style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}
+                            >
                                 <span className="text-[#BFFF0B] mt-1">•</span>
                                 <div>
                                     <span className="font-semibold">Credentialed: </span>
                                     <span>85% of your staff will have a masters and 100% of them a high school degree as a minimum.</span>
                                 </div>
                             </div>
-                            <div className="flex items-start gap-3 text-white">
+                            <div 
+                                className="flex items-start gap-3 text-white opacity-0 animate-fade-in-up" 
+                                style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}
+                            >
                                 <span className="text-[#BFFF0B] mt-1">•</span>
                                 <div>
                                     <span className="font-semibold">Grow your team from 1 to 50 in just 48 hours.</span>
                                 </div>
                             </div>
-                            <div className="flex items-start gap-3 text-white">
+                            <div 
+                                className="flex items-start gap-3 text-white opacity-0 animate-fade-in-up" 
+                                style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}
+                            >
                                 <span className="text-[#BFFF0B] mt-1">•</span>
                                 <div>
                                     <span className="font-semibold">Dedicated: </span>
                                     <span>We have some of the lowest attrition rates in the business. The average tenure of our technicians is 8 years.</span>
                                 </div>
                             </div>
-                            <div className="flex items-start gap-3 text-white">
+                            <div 
+                                className="flex items-start gap-3 text-white opacity-0 animate-fade-in-up" 
+                                style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}
+                            >
                                 <span className="text-[#BFFF0B] mt-1">•</span>
                                 <div>
                                     <span className="font-semibold">Scalable team: </span>
@@ -47,7 +78,10 @@ export default function BuildTeamSection() {
                     </div>
 
                     {/* Right: Lime Green Dots/Lines Circuit Board Pattern */}
-                    <div className="relative h-[400px] flex items-center justify-center">
+                    <div 
+                        ref={graphicRef}
+                        className={`relative h-[400px] flex items-center justify-center scroll-animate-right ${isGraphicVisible ? 'visible' : ''}`}
+                    >
                         <svg viewBox="0 0 400 400" className="w-full h-full">
                             {/* Vertical lines with dots */}
                             {[50, 100, 150, 200, 250, 300, 350].map((x, i) => (

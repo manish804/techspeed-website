@@ -1,6 +1,11 @@
 import { UserIcon, BriefcaseIcon, SuitIcon, GraduationIcon, ChartIcon, TrendingIcon } from '@/components/Icons'
+import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation'
+import { useParallax } from '@/hooks/useParallax'
 
 export default function SuccessStoriesPage() {
+    const [heroRef, heroVisible] = useScrollAnimation({ threshold: 0.12, triggerOnce: true })
+    const { getItemRef, getItemStyle } = useStaggeredAnimation(120)
+    const parallaxOffset = useParallax(0.1)
     const stories = [
         {
             company: 'Rajiv Chegu',
@@ -67,9 +72,10 @@ export default function SuccessStoriesPage() {
     return (
         <div className="pt-20">
             {/* Hero Section */}
-            <section className="bg-gradient-to-br from-[#F5F3FF] to-white py-24">
-                <div className="max-w-[1400px] mx-auto px-8">
-                    <div className="max-w-3xl">
+            <section className="bg-gradient-to-br from-[#F5F3FF] to-white py-24 relative overflow-hidden">
+                <div className="absolute -top-12 -right-12 w-52 h-52 rounded-full bg-[#A855F7]/10 blur-2xl" style={{ transform: `translateY(${parallaxOffset * 0.5}px)` }}></div>
+                <div className="max-w-[1400px] mx-auto px-8 relative z-10">
+                    <div ref={heroRef} className={`max-w-3xl scroll-animate ${heroVisible ? 'visible' : ''}`}>
                         <h1 className="text-6xl font-bold mb-6" style={{ fontFamily: 'Space Grotesk', color: '#0A0A0A' }}>
                             Success Stories
                         </h1>
@@ -109,7 +115,7 @@ export default function SuccessStoriesPage() {
                 <div className="max-w-[1400px] mx-auto px-8">
                     <div className="space-y-24">
                         {stories.map((story, index) => (
-                            <div key={story.company} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                            <div key={story.company} ref={getItemRef(index)} style={getItemStyle(index)} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                                 <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
                                     <div className="mb-6 text-[#A855F7]">
                                         <story.Icon className="w-16 h-16" />
@@ -149,7 +155,7 @@ export default function SuccessStoriesPage() {
                                 </div>
 
                                 <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
-                                    <div className="bg-[#F5F3FF] rounded-2xl p-8">
+                                    <div className="bg-[#F5F3FF] rounded-2xl p-8 card-elevated rounded-transition">
                                         <div className="text-4xl mb-4">"</div>
                                         <p className="text-xl text-gray-700 mb-6 italic leading-relaxed">
                                             {story.testimonial}

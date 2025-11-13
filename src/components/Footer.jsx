@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { FacebookIcon, TwitterIcon, LinkedInIcon, InstagramIcon } from '@/components/Icons'
+import { useMagneticHover } from '@/hooks/useMagneticHover'
 
 export default function Footer() {
     const footerLinks = {
@@ -25,10 +26,33 @@ export default function Footer() {
         ]
     }
 
+    // Floating Action Button Component
+    function FloatingActionButton() {
+        const magneticRef = useMagneticHover({ strength: 0.25 })
+        
+        return (
+            <Link
+                ref={magneticRef}
+                to="/contact"
+                className="fixed bottom-8 right-8 z-50 w-16 h-16 rounded-full bg-[#BFFF0B] text-[#0A0A0A] flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all duration-300 animate-pulse-slow magnetic-button btn-enhanced ripple-effect"
+                style={{ fontFamily: 'Inter' }}
+            >
+                <span className="text-xs font-bold text-center leading-tight relative z-10">Start a<br />Project</span>
+            </Link>
+        )
+    }
+    
     return (
         <>
-            <footer className="relative bg-[#2D1B3D] text-white pt-20 pb-10">
-                <div className="max-w-[1400px] mx-auto px-8">
+            <footer className="relative bg-[#2D1B3D] text-white pt-20 pb-10 overflow-hidden">
+                {/* Animated Gradient Background */}
+                <div className="absolute inset-0 animated-gradient-purple opacity-10"></div>
+                
+                {/* Floating Shapes */}
+                <div className="absolute top-10 left-10 w-40 h-40 bg-[#A855F7] opacity-5 rounded-full floating-shape blur-2xl"></div>
+                <div className="absolute bottom-10 right-10 w-32 h-32 bg-[#BFFF0B] opacity-5 rounded-full floating-shape blur-xl" style={{ animationDelay: '1s' }}></div>
+                
+                <div className="max-w-[1400px] mx-auto px-8 relative z-10">
                     {/* Main Footer Content */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 mb-16">
                         {/* Logo and Description */}
@@ -160,13 +184,7 @@ export default function Footer() {
             </footer>
 
             {/* Floating "Start a Project" Button */}
-            <Link
-                to="/contact"
-                className="fixed bottom-8 right-8 z-50 w-16 h-16 rounded-full bg-[#BFFF0B] text-[#0A0A0A] flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
-                style={{ fontFamily: 'Inter' }}
-            >
-                <span className="text-xs font-bold text-center leading-tight">Start a<br />Project</span>
-            </Link>
+            <FloatingActionButton />
         </>
     )
 }

@@ -1,12 +1,31 @@
 import { Link } from 'react-router-dom'
+import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import { useMagneticHover } from '@/hooks/useMagneticHover'
 
 export default function WhySuryonexSection() {
+    const [contentRef, isContentVisible] = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
+    const [graphicRef, isGraphicVisible] = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
+    const buttonRef = useMagneticHover({ strength: 0.15 })
+
     return (
         <section className="relative bg-[#2D1B3D] py-24 overflow-hidden">
-            <div className="max-w-[1400px] mx-auto px-8">
+            {/* Animated Gradient Background */}
+            <div className="absolute inset-0 animated-gradient-purple opacity-20"></div>
+            
+            {/* Floating Shapes */}
+            <div className="absolute top-10 left-10 w-36 h-36 bg-[#FF6B35] opacity-5 rounded-full floating-shape blur-2xl"></div>
+            <div className="absolute bottom-10 right-10 w-28 h-28 bg-[#BFFF0B] opacity-5 rounded-full floating-shape blur-xl" style={{ animationDelay: '2s' }}></div>
+            
+            {/* Dot Pattern Overlay */}
+            <div className="absolute inset-0 dot-pattern opacity-10"></div>
+            
+            <div className="max-w-[1400px] mx-auto px-8 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     {/* Left: Content */}
-                    <div className="relative z-10">
+                    <div 
+                        ref={contentRef}
+                        className={`relative z-10 scroll-animate-left ${isContentVisible ? 'visible' : ''}`}
+                    >
                         <h2 className="text-4xl lg:text-5xl font-normal mb-6 text-white leading-tight" style={{ fontFamily: 'Space Grotesk' }}>
                             Why Suryonex is different?
                         </h2>
@@ -16,38 +35,54 @@ export default function WhySuryonexSection() {
                         
                         {/* Bullet Points */}
                         <div className="space-y-4 mb-8">
-                            <div className="flex items-start gap-3 text-white">
+                            <div 
+                                className="flex items-start gap-3 text-white opacity-0 animate-fade-in-up" 
+                                style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}
+                            >
                                 <span className="text-[#BFFF0B] mt-1">•</span>
                                 <span>Local US-based support</span>
                             </div>
-                            <div className="flex items-start gap-3 text-white">
+                            <div 
+                                className="flex items-start gap-3 text-white opacity-0 animate-fade-in-up" 
+                                style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}
+                            >
                                 <span className="text-[#BFFF0B] mt-1">•</span>
                                 <span>High-quality work</span>
                             </div>
-                            <div className="flex items-start gap-3 text-white">
+                            <div 
+                                className="flex items-start gap-3 text-white opacity-0 animate-fade-in-up" 
+                                style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}
+                            >
                                 <span className="text-[#BFFF0B] mt-1">•</span>
                                 <span>Cost-effective global teams</span>
                             </div>
-                            <div className="flex items-start gap-3 text-white">
+                            <div 
+                                className="flex items-start gap-3 text-white opacity-0 animate-fade-in-up" 
+                                style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}
+                            >
                                 <span className="text-[#BFFF0B] mt-1">•</span>
                                 <span>AI-driven processing</span>
                             </div>
                         </div>
                         
-                        <Link
-                            to="/contact"
-                            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#2D1B3D] border-2 border-white text-white text-sm font-medium hover:bg-white hover:text-[#2D1B3D] transition-all"
-                            style={{ fontFamily: 'Inter' }}
-                        >
-                            Book a Meeting
-                            <span className="flex items-center justify-center w-5 h-5 rounded-full bg-[#BFFF0B] text-[#0A0A0A] text-sm font-bold leading-none">
-                                →
-                            </span>
-                        </Link>
+                            <Link
+                                ref={buttonRef}
+                                to="/contact"
+                                className="magnetic-button btn-enhanced ripple-effect inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#2D1B3D] border-2 border-white text-white text-sm font-medium hover:bg-white hover:text-[#2D1B3D]"
+                                style={{ fontFamily: 'Inter' }}
+                            >
+                                Book a Meeting
+                                <span className="flex items-center justify-center w-5 h-5 rounded-full bg-[#BFFF0B] text-[#0A0A0A] text-sm font-bold leading-none">
+                                    →
+                                </span>
+                            </Link>
                     </div>
 
                     {/* Right: Lime Green Dots/Lines Pattern */}
-                    <div className="relative h-[400px] flex items-center justify-center">
+                    <div 
+                        ref={graphicRef}
+                        className={`relative h-[400px] flex items-center justify-center scroll-animate-right ${isGraphicVisible ? 'visible' : ''}`}
+                    >
                         <svg viewBox="0 0 400 400" className="w-full h-full">
                             {/* Vertical lines with dots */}
                             {[60, 120, 180, 240, 300, 340].map((x, i) => (
