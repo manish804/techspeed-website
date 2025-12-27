@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { FacebookIcon, TwitterIcon, LinkedInIcon, InstagramIcon } from '@/components/Icons'
 import { useMagneticHover } from '@/hooks/useMagneticHover'
+import NewsletterSignup from '@/components/NewsletterSignup'
 
 export default function Footer() {
     const footerLinks = {
@@ -109,8 +110,8 @@ export default function Footer() {
                         ))}
                     </div>
 
-                    {/* Contact Information */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 pb-12 border-b border-white/10">
+                    {/* Contact Information & Newsletter */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 pb-12 border-b border-white/10">
                         <div>
                             <h4 className="font-semibold mb-4 text-lg" style={{ fontFamily: 'Space Grotesk' }}>
                                 Headquarters - USA
@@ -130,6 +131,7 @@ export default function Footer() {
                                 Aundh IT Park, Office No. B/502, Pragati Nagar, Bopodi, Pune, Maharashtra 411020
                             </p>
                         </div>
+                        <NewsletterSignup variant="footer" />
                     </div>
 
                     {/* Partner Logos */}
@@ -169,7 +171,7 @@ export default function Footer() {
                     {/* Bottom Bar */}
                     <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
                         <p className="text-white/60 text-sm" style={{ fontFamily: 'Inter' }}>
-                            Copyright 2023 | All Rights Reserved
+                            Copyright {new Date().getFullYear()} Suryonex | All Rights Reserved
                         </p>
                         <div className="flex gap-6 text-sm">
                             <Link to="/privacy" className="text-white/60 hover:text-white transition-colors" style={{ fontFamily: 'Inter' }}>

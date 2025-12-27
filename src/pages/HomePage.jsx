@@ -1,5 +1,6 @@
 import Hero from '@/components/Hero'
 import ClientLogos from '@/components/ClientLogos'
+import TrustBadges from '@/components/TrustBadges'
 import IntroductionSection from '@/components/IntroductionSection'
 import Features from '@/components/Features'
 import Services from '@/components/Services'
@@ -15,6 +16,7 @@ export default function HomePage() {
         <>
             <Hero />
             <ClientLogos />
+            <TrustBadges />
             <IntroductionSection />
             <Services />
             <Testimonials />

@@ -3,6 +3,7 @@ import { EmailIcon, PhoneIcon, LocationIcon, ChatIcon, MapIcon } from '@/compone
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 import Accordion from '@/components/Accordion'
 import { useMagneticHover } from '@/hooks/useMagneticHover'
+import { submitLead } from '@/lib/supabase'
 
 export default function ContactPage() {
     const [formData, setFormData] = useState({
@@ -14,15 +15,53 @@ export default function ContactPage() {
         message: ''
     })
     const [submitted, setSubmitted] = useState(false)
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [error, setError] = useState(null)
     const [heroRef, isHeroVisible] = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
     const [formRef, isFormVisible] = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
     const [infoRef, isInfoVisible] = useScrollAnimation({ threshold: 0.2, triggerOnce: true })
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        // Simulate form submission
-        setSubmitted(true)
-        setTimeout(() => setSubmitted(false), 3000)
+        setIsSubmitting(true)
+        setError(null)
+
+        try {
+            await submitLead({
+                ...formData,
+                source: 'contact_page'
+            })
+
+            const notifyUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/notify-lead`
+            fetch(notifyUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    company: formData.company,
+                    service: formData.service
+                })
+            }).catch(() => {})
+
+            setSubmitted(true)
+            setFormData({
+                name: '',
+                email: '',
+                company: '',
+                phone: '',
+                service: '',
+                message: ''
+            })
+            setTimeout(() => setSubmitted(false), 5000)
+        } catch (err) {
+            setError('Failed to submit. Please try again or email us directly.')
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     const handleChange = (e) => {
@@ -32,17 +71,31 @@ export default function ContactPage() {
         })
     }
     
-    // Magnetic Submit Button Component
-    function MagneticSubmitButton({ submitted }) {
+    function MagneticSubmitButton({ submitted, isSubmitting, disabled }) {
         const magneticRef = useMagneticHover({ strength: 0.15 })
-        
+
         return (
             <button
                 ref={magneticRef}
                 type="submit"
-                className="magnetic-button btn-enhanced ripple-effect w-full sm:w-auto px-8 py-4 rounded-lg bg-[#2D1B3D] text-white font-semibold flex items-center justify-center gap-2"
+                disabled={disabled || isSubmitting}
+                className={`magnetic-button btn-enhanced ripple-effect w-full sm:w-auto px-8 py-4 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all ${
+                    disabled || isSubmitting
+                        ? 'bg-gray-400 cursor-not-allowed'
+                        : submitted
+                            ? 'bg-green-600'
+                            : 'bg-[#2D1B3D]'
+                } text-white`}
             >
-                {submitted ? (
+                {isSubmitting ? (
+                    <>
+                        <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                        Sending...
+                    </>
+                ) : submitted ? (
                     <>
                         <span>✓</span>
                         Message Sent!
@@ -209,7 +262,19 @@ export default function ContactPage() {
                                     ></textarea>
                                 </div>
 
-                                <MagneticSubmitButton submitted={submitted} />
+                                {error && (
+                                    <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                                        {error}
+                                    </div>
+                                )}
+
+                                {submitted && (
+                                    <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-700 text-sm">
+                                        Thank you for reaching out! We'll get back to you within 24 hours.
+                                    </div>
+                                )}
+
+                                <MagneticSubmitButton submitted={submitted} isSubmitting={isSubmitting} />
                             </form>
                         </div>
 
