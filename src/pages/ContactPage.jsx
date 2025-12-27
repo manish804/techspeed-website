@@ -4,7 +4,7 @@ import { EmailIcon, PhoneIcon, LocationIcon, ChatIcon } from '@/components/Icons
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 import Accordion from '@/components/Accordion'
 import { useMagneticHover } from '@/hooks/useMagneticHover'
-import { submitLead } from '@/lib/supabase'
+import { submitLead, supabaseUrl, supabaseAnonKey } from '@/lib/supabase'
 import InteractiveMap from '@/components/InteractiveMap'
 
 export default function ContactPage() {
@@ -46,12 +46,12 @@ export default function ContactPage() {
                 source: 'contact_page'
             })
 
-            const notifyUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/notify-lead`
+            const notifyUrl = `${supabaseUrl}/functions/v1/notify-lead`
             fetch(notifyUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`
+                    'Authorization': `Bearer ${supabaseAnonKey}`
                 },
                 body: JSON.stringify({
                     name: formData.name,
