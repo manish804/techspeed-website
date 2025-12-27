@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { supabaseUrl, supabaseAnonKey } from '../lib/supabase'
 
 export default function AIChatWidget() {
     const [isOpen, setIsOpen] = useState(false)
@@ -37,12 +38,12 @@ export default function AIChatWidget() {
         setIsLoading(true)
 
         try {
-            const chatUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-chat`
+            const chatUrl = `${supabaseUrl}/functions/v1/ai-chat`
             const response = await fetch(chatUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`
+                    'Authorization': `Bearer ${supabaseAnonKey}`
                 },
                 body: JSON.stringify({
                     message: userMessage,
