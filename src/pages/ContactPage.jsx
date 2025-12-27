@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { EmailIcon, PhoneIcon, LocationIcon, ChatIcon, MapIcon } from '@/components/Icons'
+import { EmailIcon, PhoneIcon, LocationIcon, ChatIcon } from '@/components/Icons'
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 import Accordion from '@/components/Accordion'
 import { useMagneticHover } from '@/hooks/useMagneticHover'
 import { submitLead } from '@/lib/supabase'
+import InteractiveMap from '@/components/InteractiveMap'
 
 export default function ContactPage() {
     const [searchParams] = useSearchParams()
@@ -332,21 +333,15 @@ export default function ContactPage() {
                                 />
                             </div>
 
-                            {/* Map Placeholder */}
-                            <div 
-                                className="mt-12 rounded-2xl overflow-hidden bg-gradient-to-br from-[#F5F3FF] to-[#E9D5FF] h-64 flex items-center justify-center card-elevated rounded-transition relative gradient-overlay"
+                            <div
+                                className="mt-12 card-elevated rounded-transition"
                                 style={{
                                     opacity: isInfoVisible ? 1 : 0,
                                     transform: isInfoVisible ? 'scale(1)' : 'scale(0.95)',
                                     transition: 'opacity 0.6s ease-out 0.5s, transform 0.6s ease-out 0.5s'
                                 }}
                             >
-                                <div className="text-center relative z-10">
-                                    <div className="animate-float mb-4">
-                                        <MapIcon className="w-16 h-16 mx-auto text-[#A855F7]" />
-                                    </div>
-                                    <p className="text-gray-600 font-medium">Interactive Map</p>
-                                </div>
+                                <InteractiveMap className="h-72" />
                             </div>
                         </div>
                     </div>
