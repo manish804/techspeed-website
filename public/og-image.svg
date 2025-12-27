@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5F3FF"/>
+      <stop offset="100%" style="stop-color:#E9D5FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  <rect x="0" y="530" width="1200" height="100" fill="#2D1B3D"/>
+  <text x="100" y="200" font-family="system-ui, sans-serif" font-size="120" font-weight="700" fill="#0A0A0A">TS</text>
+  <text x="100" y="240" font-family="system-ui, sans-serif" font-size="24" font-weight="600" letter-spacing="3" fill="#0A0A0A">SURYONEX</text>
+  <text x="100" y="340" font-family="system-ui, sans-serif" font-size="56" font-weight="600" fill="#0A0A0A">All-in-One</text>
+  <text x="100" y="420" font-family="system-ui, sans-serif" font-size="56" font-weight="600" fill="#0A0A0A">Outsourcing</text>
+  <text x="100" y="590" font-family="system-ui, sans-serif" font-size="24" fill="#FFFFFF">Human-powered, AI-enhanced outsourcing services</text>
+  <circle cx="1000" cy="200" r="80" fill="#A855F7" opacity="0.3"/>
+  <circle cx="1050" cy="350" r="60" fill="#A855F7" opacity="0.2"/>
+  <circle cx="950" cy="420" r="40" fill="#BFFF0B" opacity="0.3"/>
+</svg>

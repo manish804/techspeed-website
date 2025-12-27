@@ -35,7 +35,7 @@ export default function Footer() {
             <Link
                 ref={magneticRef}
                 to="/contact"
-                className="fixed bottom-8 right-8 z-50 w-16 h-16 rounded-full bg-[#BFFF0B] text-[#0A0A0A] flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all duration-300 animate-pulse-slow magnetic-button btn-enhanced ripple-effect"
+                className="fixed bottom-8 left-8 z-50 w-16 h-16 rounded-full bg-[#BFFF0B] text-[#0A0A0A] flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all duration-300 animate-pulse-slow magnetic-button btn-enhanced ripple-effect"
                 style={{ fontFamily: 'Inter' }}
             >
                 <span className="text-xs font-bold text-center leading-tight relative z-10">Start a<br />Project</span>

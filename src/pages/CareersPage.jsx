@@ -1,14 +1,13 @@
+import { Link } from 'react-router-dom'
 import { MoneyIcon, HealthIcon, VacationIcon, BookIcon, HomeIcon, TargetIcon, BuildingIcon, LocationIcon, ClockIcon } from '@/components/Icons'
 import { useScrollAnimation, useStaggeredAnimation } from '@/hooks/useScrollAnimation'
 import { useParallax } from '@/hooks/useParallax'
-import { useRipple } from '@/hooks/useRipple'
 
 export default function CareersPage() {
     const [heroRef, heroVisible] = useScrollAnimation({ threshold: 0.12, triggerOnce: true })
     const { getItemRef: getBenefitRef, getItemStyle: getBenefitStyle } = useStaggeredAnimation(120)
     const { getItemRef: getPositionRef, getItemStyle: getPositionStyle } = useStaggeredAnimation(100)
     const parallaxOffset = useParallax(0.1)
-    const [applyRef, applyClick] = useRipple()
     const positions = [
         { title: 'Customer Service Representative', department: 'Operations', location: 'Remote', type: 'Full-time' },
         { title: 'Data Entry Specialist', department: 'Data Services', location: 'Remote', type: 'Full-time' },
@@ -101,9 +100,12 @@ export default function CareersPage() {
                                         </span>
                                     </div>
                                 </div>
-                                <button ref={applyRef} onClick={applyClick} className="magnetic-button btn-enhanced ripple-effect px-6 py-3 bg-[#2D1B3D] text-white rounded-lg font-semibold whitespace-nowrap">
+                                <Link
+                                    to={`/contact?position=${encodeURIComponent(position.title)}`}
+                                    className="magnetic-button btn-enhanced ripple-effect px-6 py-3 bg-[#2D1B3D] text-white rounded-lg font-semibold whitespace-nowrap hover:bg-[#3d2550] transition-colors"
+                                >
                                     Apply Now →
-                                </button>
+                                </Link>
                             </div>
                         ))}
                     </div>

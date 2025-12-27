@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { EmailIcon, PhoneIcon, LocationIcon, ChatIcon, MapIcon } from '@/components/Icons'
 import { useScrollAnimation } from '@/hooks/useScrollAnimation'
 import Accordion from '@/components/Accordion'
@@ -6,14 +7,26 @@ import { useMagneticHover } from '@/hooks/useMagneticHover'
 import { submitLead } from '@/lib/supabase'
 
 export default function ContactPage() {
+    const [searchParams] = useSearchParams()
+    const positionParam = searchParams.get('position')
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         company: '',
         phone: '',
         service: '',
-        message: ''
+        message: positionParam ? `I am interested in applying for the ${positionParam} position.` : ''
     })
+
+    useEffect(() => {
+        if (positionParam) {
+            setFormData(prev => ({
+                ...prev,
+                message: `I am interested in applying for the ${positionParam} position.`
+            }))
+        }
+    }, [positionParam])
     const [submitted, setSubmitted] = useState(false)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [error, setError] = useState(null)
