@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import ScrollToTop from '@/components/ScrollToTop'
+import AIChatWidget from '@/components/AIChatWidget'
 import HomePage from '@/pages/HomePage'
 import SolutionsPage from '@/pages/SolutionsPage'
 import WorkforcePage from '@/pages/WorkforcePage'
@@ -75,6 +76,7 @@ function App() {
         </main>
         <Footer />
       </div>
+      <AIChatWidget />
     </Router>
   )
 }
